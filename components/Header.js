@@ -17,12 +17,12 @@ export default function Header() {
                         </Link>
                     </div>
                     <div className="text-xl px-4 flex">
-                        <Link href="/manage-bookings">
+                        <Link href="/convert">
                             <a>Convert</a>
                         </Link>
                     </div>
                     <div className="text-xl px-4 flex">
-                        <Link href="/course-info">
+                        <Link href="/portfolio">
                             <a>Portfolio</a>
                         </Link>
                     </div>
