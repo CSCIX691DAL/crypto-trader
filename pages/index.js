@@ -15,7 +15,6 @@ export default function Home() {
     }
 
     getUserInfo();
-    console.log(user)
   }, []);
 
   return (

@@ -6,3 +6,8 @@ export const getUser = async (userID) => {
     const res = await axios.get(`${USER_URL}/${userID}`);
     return res.data;
 }
+
+export const deleteUser = async (userID) => {
+    const res = await axios.delete(`${USER_URL}/${userID}`);
+    return res.data;
+}
