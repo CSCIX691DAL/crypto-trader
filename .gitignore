@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# database
+/utils/db/serviceAccountKey.json
+
 # production
 /build
 
