@@ -10,12 +10,11 @@ export default function Home() {
   const [user, setUser] = React.useState();
   const [ session, loading ] = useSession();
 
-  console.log("BLANK: ", MD5('').toString(encoder));
-
   const startSession = async(hash, email, name) => {
     const checkIfUserExists = await getUser(hash);
-    if (checkIfUserExists.status === 400) {
+    if (!checkIfUserExists.data) {
       const create = await createUser(hash, email, name);
+      console.log("Created user", create);
     }
   }
 
@@ -32,7 +31,7 @@ export default function Home() {
       setUser(res.data);
     }
 
-    getUserInfo(session ? session.user.email : '');
+    getUserInfo(session ? MD5(session.user.email).toString(encoder) : '');
   }, []);
 
   return (
@@ -45,7 +44,8 @@ export default function Home() {
 
       <Header/>
       <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
-            Welcome to the Dashboard, {user ? user.name : ''} 🚀
+            {session && <div>Welcome to the Dashboard, {session.user ? session.user.name.split(" ")[0] : ''} 🚀</div>}
+            {!session && <div>Please login with Google above ☝</div>}
       </main>
 
     </div>
