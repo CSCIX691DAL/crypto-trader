@@ -8,10 +8,16 @@ export default async (req, res) => {
             const user = (await db.collection('users').doc(id).get()).data();
             res.status(200).json(user);
         } else if (req.method === 'PUT') {
-            /* 
-              * We can leave this blank for now
-              * Will update it once we define what exactly we want to do
-            */
+            await db.collection('users').doc(id).set({
+                name: req.body.name,
+                email: req.body.email
+            }, { merge: true }).then(() => {
+                res.status(200).json({
+                    message: "User added to database"
+                });
+            }).catch((error) => {
+                console.error("Error adding user to database", error);
+            });
         } else if (req.method === 'DELETE') {
             await db.collection('users').doc(id).delete();
         }
