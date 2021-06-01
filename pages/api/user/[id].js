@@ -7,7 +7,7 @@ export default async (req, res) => {
         if (req.method === 'GET') {
             const user = (await db.collection('users').doc(id).get()).data();
             res.status(200).json(user);
-        } else if (req.method === 'PUT') {
+        } else if (req.method === 'POST') {
             await db.collection('users').doc(id).set({
                 name: req.body.name,
                 email: req.body.email

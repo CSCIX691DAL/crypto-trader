@@ -15,8 +15,10 @@ export default function Convert() {
     
           <Header/>
           <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
-                {session && <div>This is where you convert currencies, {session.user ? session.user.name.split(" ")[0] : ''} 🏧</div>}
-                {!session && <div>Please login with Google above ☝</div>}
+            {session ? 
+              (<div>This is where you convert currencies, {session.user ? session.user.name.split(" ")[0] : ''} 🏧</div>) : 
+              (<div>Please login with Google above ☝</div>)
+            }
           </main>
     
         </div>
