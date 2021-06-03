@@ -32,7 +32,8 @@ jobs:
 
     - name: Create secret files
       run: |-
-        echo "${{ secrets.DB_SERVICE_ACCOUNT_JSON }}" > ./utils/db/serviceAccountKey.json && echo "${{ secrets.ENVIRONMENT_VARIABLES }}" > ./.env
+        gsutil -m cp "gs://crypto-trader-secrets/.env" .
+        gsutil -m cp "gs://crypto-trader-secrets/serviceAccountKey.json" utils/db
 
     - name: Enable the necessary APIs and enable docker auth
       run: |-
