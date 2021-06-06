@@ -49,8 +49,6 @@ export default function Home() {
 
         getCoinInfo();
     }, []);
-
-    const coindisp = coins.map(coin => coin);
         
     return (
         <div>
@@ -69,7 +67,7 @@ export default function Home() {
         </main>
         <div className='m-8 flex font-normal text-base text-gray-800 '>
             <h1 className='coin-text'>Coins Table</h1>
-            {coindisp.map(coin => {
+            {coins.map(coin => {
                 return <DashboardTableItem coin={coin} />  
             })}
         </div>
