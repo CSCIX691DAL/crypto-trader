@@ -2,19 +2,23 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import * as React from 'react'
 import { getUser, createUser } from '../services/user'
+import { getDashboardInfo } from '../services/coins'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { useSession } from 'next-auth/client'
+import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.js'
+
 
 export default function Home() {
     const [user, setUser] = React.useState();
     const [ session, loading ] = useSession();
+    
 
     const startSession = async(hash, email, name) => {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
-        const create = await createUser(hash, email, name);
-        console.log("Created user", create);
+            const create = await createUser(hash, email, name);
+            console.log("Created user", create);
         }
     }
 
@@ -22,18 +26,30 @@ export default function Home() {
         let hash = MD5(session.user.email).toString(encoder);
         startSession(hash, session.user.email, session.user.name);
     }
-    
-    React.useEffect(() => {
 
+    // get user info from Firebase
+    React.useEffect(() => {
         const getUserInfo = async(email) => {
-        let hash = MD5(email).toString(encoder);
-        const res = await getUser(hash);
-        setUser(res.data);
+            let hash = MD5(email).toString(encoder);
+            const res = await getUser(hash);
+            setUser(res.data);
         }
 
         getUserInfo(session ? MD5(session.user.email).toString(encoder) : '');
     }, []);
+    
 
+    // grab coin details/pics from CoinGecko
+    const [coins, setCoins] = React.useState([]);
+    React.useEffect(() => {
+        const getCoinInfo = async() => {
+            const data = await getDashboardInfo();
+            setCoins(data);
+        }
+
+        getCoinInfo();
+    }, []);
+        
     return (
         <div>
         <Head>
@@ -49,7 +65,15 @@ export default function Home() {
                 (<div>Please login with Google above ☝</div>)
             }
         </main>
+        <div className='m-8 flex font-normal text-base text-gray-800 '>
+            <h1 className='coin-text'>Coins Table</h1>
+            {coins.map(coin => {
+                return <DashboardTableItem coin={coin} />  
+            })}
+        </div>
 
         </div>
+    
     )
 }
+ 
