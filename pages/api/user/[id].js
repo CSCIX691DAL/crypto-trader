@@ -10,15 +10,20 @@ export default async (req, res) => {
         } 
         else if (req.method === 'POST') {
             await db.collection('users').doc(id).set({
-                name: req.body.name,
-                email: req.body.email
-            }, { merge: true }).then(() => {
-                res.status(200).json({
-                    message: "User added to database"
+                    name: req.body.name,
+                    email: req.body.email,
+                    holdings: []
+                }, { 
+                    merge: true 
+                })
+                .then(() => {
+                    res.status(200).json({
+                        message: "User added to database"
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error adding user to database", error);
                 });
-            }).catch((error) => {
-                console.error("Error adding user to database", error);
-            });
         } 
         else if (req.method === 'DELETE') {
             await db.collection('users').doc(id).delete();

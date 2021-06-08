@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { addTransactionToUser } from '../../services/transactions'
-import { getCoinInfo } from '../../services/coins'
+import { addTransactionToPortfolio } from '../../services/user'
 
 export default function Coin() {
     const [ session, loading ] = useSession();
@@ -28,7 +28,6 @@ export default function Coin() {
 
         // add a transaction to firebase
         const createTransaction = async(hash, coinName, amount) => {
-            const info = await getCoinInfo(coin);
 
             const transaction = {
                 num_purchased: amount,
@@ -37,10 +36,12 @@ export default function Coin() {
                 user_id: hash
             }
 
-            const res = await addTransactionToUser(hash, transaction);
-            if (res.status === 200) {
+            const res1 = await addTransactionToUser(hash, transaction);
+            const res2 = await addTransactionToPortfolio(hash, transaction);
+            if (res1.status === 200 && res2.status === 200) {
                 alert("Purchase successful");
             }
+ 
         }
 
         createTransaction(hash, {coin}.coin, amount);
