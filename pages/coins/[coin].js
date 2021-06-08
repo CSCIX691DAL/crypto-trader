@@ -26,7 +26,7 @@ export default function Coin() {
         // get the user's id by hashing their email
         const hash =  MD5(session.user.email).toString(encoder);
 
-        // add a transaction to firebase
+        // add info to firebase
         const createTransaction = async(hash, coinName, amount) => {
 
             const transaction = {
@@ -36,6 +36,7 @@ export default function Coin() {
                 user_id: hash
             }
 
+            // add transaction and update user's holdings
             const res1 = await addTransactionToUser(hash, transaction);
             const res2 = await addTransactionToPortfolio(hash, transaction);
             if (res1.status === 200 && res2.status === 200) {
@@ -46,6 +47,7 @@ export default function Coin() {
 
         createTransaction(hash, {coin}.coin, amount);
         
+        // return false so page isn't refreshed
         return false;
     }
 
