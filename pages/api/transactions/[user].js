@@ -14,9 +14,18 @@ export default async (req, res) => {
 
             res.status(200).json(result);
         } else if (req.method === 'POST') {
-            /* 
-              * Leave this blank for when we implement the purchase of a transaction
-            */
+            await db.collection('transactions').add({
+                num_purchased: req.body.num_purchased,
+                stock_name: req.body.stock_name,
+                total_transaction: req.body.total_transaction,
+                user_id: req.body.user_id
+            }).then(() => {
+                res.status(200).json({
+                    message: "Added transaction to database"
+                })
+            }).catch((error) => {
+                console.error("Error adding transaction to database", error)
+            });
         }
 
     } catch {

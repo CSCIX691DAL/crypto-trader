@@ -11,7 +11,6 @@ export const getUser = async (userID) => {
 }
 
 export const createUser = async (hash, userEmail, userName) => {
-    console.log(userEmail);
     const res = await axios.post(`${USER_URL}/${hash}`, {
         email: userEmail,
         name: userName

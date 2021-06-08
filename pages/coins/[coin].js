@@ -5,6 +5,8 @@ import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
+import { addTransactionToUser } from '../../services/transactions'
+import { getCoinInfo } from '../../services/coins'
 
 export default function Coin() {
     const [ session, loading ] = useSession();
@@ -14,9 +16,35 @@ export default function Coin() {
     const { coin } = router.query;
 
     function purchase() {
+
+        // confirm the purchase with the user
+        let upperName = {coin}.coin.charAt(0).toUpperCase() + {coin}.coin.slice(1);
+        if (!confirm("Are you sure you want to purchase " + amount + " " + upperName + "?")) {
+            return false;
+        }
+
+        // get the user's id by hashing their email
         const hash =  MD5(session.user.email).toString(encoder);
-        console.log("hash:", hash);
-        console.log("Purchasing", amount, "of",  {coin}.coin, "for user", session.user.email);
+
+        // add a transaction to firebase
+        const createTransaction = async(hash, coinName, amount) => {
+            const info = await getCoinInfo(coin);
+
+            const transaction = {
+                num_purchased: amount,
+                stock_name: coinName,
+                total_transaction: amount,
+                user_id: hash
+            }
+
+            const res = await addTransactionToUser(hash, transaction);
+            if (res.status === 200) {
+                alert("Purchase successful");
+            }
+        }
+
+        createTransaction(hash, {coin}.coin, amount);
+        
         return false;
     }
 
