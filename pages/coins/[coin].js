@@ -5,50 +5,16 @@ import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
-import { addTransactionToUser } from '../../services/transactions'
-import { addTransactionToPortfolio } from '../../services/user'
+import { purchase } from '../../services/transactions'
 
 export default function Coin() {
     const [ session, loading ] = useSession();
     const router = useRouter();
-    const [ amount, setAmount ] = React.useState('');
-
+    const [ amount, setAmount ] = React.useState('amount');
     const { coin } = router.query;
 
-    function purchase() {
-
-        // confirm the purchase with the user
-        let upperName = {coin}.coin.charAt(0).toUpperCase() + {coin}.coin.slice(1);
-        if (!confirm("Are you sure you want to purchase " + amount + " " + upperName + "?")) {
-            return false;
-        }
-
-        // get the user's id by hashing their email
-        const hash =  MD5(session.user.email).toString(encoder);
-
-        // add info to firebase
-        const createTransaction = async(hash, coinName, amount) => {
-
-            const transaction = {
-                num_purchased: amount,
-                stock_name: coinName,
-                total_transaction: amount,
-                user_id: hash
-            }
-
-            // add transaction and update user's holdings
-            const res1 = await addTransactionToUser(hash, transaction);
-            const res2 = await addTransactionToPortfolio(hash, transaction);
-            if (res1.status === 200 && res2.status === 200) {
-                alert("Purchase successful");
-            }
- 
-        }
-
-        createTransaction(hash, {coin}.coin, amount);
-        
-        // return false so page isn't refreshed
-        return false;
+    const hashEmail = () => {
+        return MD5(session.user.email).toString(encoder);
     }
 
     return (
@@ -70,7 +36,7 @@ export default function Coin() {
                         <input type="number" min="0" placeholder="Amount" onChange={event => setAmount(event.target.value)} className="mr-2 border-b border-blue-500" />
                         {
                             session ? (
-                                <button onClick={() => purchase()} className="rounded-xl p-2 bg-blue-500 text-white" type="button">Purchase</button>
+                                <button onClick={() => purchase({coin}.coin, (amount ? amount : 0), hashEmail())} className="rounded-xl p-2 bg-blue-500 text-white" type="button">Purchase</button>
                             ) : (
                                 <button className="rounded-xl p-2 bg-gray-200 text-white" type="button">Purchase</button>
                             )
