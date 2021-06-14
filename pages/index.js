@@ -18,7 +18,6 @@ export default function Home() {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
             const create = await createUser(hash, email, name);
-            console.log("Created user", create);
         }
     }
 

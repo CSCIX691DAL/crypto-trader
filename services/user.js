@@ -11,7 +11,6 @@ export const getUser = async (userID) => {
 }
 
 export const createUser = async (hash, userEmail, userName) => {
-    console.log(userEmail);
     const res = await axios.post(`${USER_URL}/${hash}`, {
         email: userEmail,
         name: userName
@@ -22,4 +21,15 @@ export const createUser = async (hash, userEmail, userName) => {
 export const deleteUser = async (userID) => {
     const res = await axios.delete(`${USER_URL}/${userID}`);
     return res.data;
+}
+
+export const addTransactionToPortfolio = async (hash, transaction) => {
+    const res = await axios.post(`${USER_URL}/portfolio/${hash}`, {
+        coin: transaction.stock_name,
+        amount: transaction.num_purchased
+    });
+    return {
+        data: res.data,
+        status: res.status
+    };
 }
