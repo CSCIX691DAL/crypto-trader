@@ -33,3 +33,11 @@ export const addTransactionToPortfolio = async (hash, transaction) => {
         status: res.status
     };
 }
+
+export const getUserHoldings = async (hash) => {
+    const res = await axios.get(`${USER_URL}/${hash}`);
+    console.log(res);
+    return {
+        data:res.data.holdings
+    }
+}
