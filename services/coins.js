@@ -18,7 +18,12 @@ export const getDashboardInfo = async() => {
 
 export const getCoinInfo = async(id) => {
     const res = await axios.get(`${COIN_GECKO_URL}/coins/${id}`, {
-        params: { params: { id: id }}
+        params: { params: { 
+            id: id
+            // market_data: true,
+
+            
+        }}
     });
 
     return res.data;

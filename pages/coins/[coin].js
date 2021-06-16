@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { purchase } from '../../services/transactions'
-
+import {getCoinInfo} from '../../services/coins'
 
 
 export default function Coin() {
@@ -14,10 +14,35 @@ export default function Coin() {
     const router = useRouter();
     const [ amount, setAmount ] = React.useState('amount');
     const { coin } = router.query;
-
+    const coinName = {coin}.coin;
     const hashEmail = () => {
         return MD5(session.user.email).toString(encoder);
     }
+
+// grab coin details/pics from CoinGecko
+    const [ticker, setTicker] = React.useState();
+    
+    const [cap, setCap] = React.useState();
+    const [price, setPrice] = React.useState();
+    const [volume, setVolume] = React.useState();
+    const [supply, setSupply] = React.useState();
+
+    React.useEffect(() => {
+        const getCoinDetails = async() => {
+            const data = await getCoinInfo({coin}.coin);
+            
+            setTicker(data.symbol);
+            setPrice(data.market_data.current_price.cad);
+            setCap(data.market_data.market_cap.cad);
+            setVolume(data.market_data.total_volume.cad);
+            setSupply(data.market_data.circulating_supply);
+            
+        }
+    
+        coinName ? getCoinDetails(): "" ;
+        console.log({coin}.coin);
+
+    }, [coinName, cap, price, volume, supply, ticker]  );
 
     return (
         <>
@@ -34,7 +59,6 @@ export default function Coin() {
                 <div className="px-4 py-2 m-2 text-2xl">
                     Crypto Currency {coin} 💰
                 </div>
-{/*----------------------------------------------*/}
             
                 <div className=" bg-white shadow overflow-hidden sm:rounded w-2/4 justify-center items-center " >
                 <div className="px-4 py-5 sm:px-6">
@@ -47,31 +71,32 @@ export default function Coin() {
         
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500"> Ticker {coin}</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{coin}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{ticker}</dd>
                     </div>
 
  {/*/*add coin details through API - Price in CAD Dollars (use this as standard)*/}  
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Price $CAD</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {/*Ticker code:*/} </dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} </dd>
+                
                     </div>
 
 {/*add coin details through API - Market Cap*/}                  
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Market Cap $CAD</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{/*Ticker code:*/}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap}</dd>
                     </div>
 
 {/*add coin details through API - Volume (24h)*/}  
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500"> Volume (24h) $CAD </dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{/* volume traded */}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume}</dd>
                     </div>
 
 {/*add coin details through API - Circulating supply*/}  
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Circulating Supply</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {/* Supply*/}  </dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {supply}  </dd>
                     </div> 
 
                     <div className=" flex m-10 justify-center">
@@ -94,5 +119,7 @@ export default function Coin() {
         
 
         </>
+
+        
     )
 }
