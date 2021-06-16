@@ -54,7 +54,7 @@ export default function Coin() {
                const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
                     vs_currency: "usd",
-                   days: "800",
+                   days: "365",
                 },
                });
             
