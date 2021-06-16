@@ -9,15 +9,70 @@ import { purchase } from '../../services/transactions'
 import {getCoinInfo} from '../../services/coins'
 
 
+import { useEffect } from 'react'
+import axios from 'axios'
+import {COIN_GECKO_URL} from '../../services/coins'
+import PriceChart from '../../components/PriceChart'
+
+
+
+
+
 export default function Coin() {
     const [ session, loading ] = useSession();
     const router = useRouter();
     const [ amount, setAmount ] = React.useState('amount');
     const { coin } = router.query;
     const coinName = {coin}.coin;
+    const COIN_GECKO_URL = `https://api.coingecko.com/api/v3/`;
+
     const hashEmail = () => {
         return MD5(session.user.email).toString(encoder);
     }
+    const [coinData, setCoinData] = React.useState({})
+    const format = data => {
+        return data.map(el => {
+            return {
+                t: el[0],
+                y: el[1].toFixed(2)
+            }
+        })
+    }
+
+         useEffect(() => {
+         const fetchdata = async() =>{
+            const resDay = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+             params: {
+                 vs_currency: "usd",
+                days: "1",
+             },
+            });
+            const resWeek = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+                params: {
+                    vs_currency: "usd",
+                   days: "7",
+                },
+               });
+               const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+                params: {
+                    vs_currency: "usd",
+                   days: "800",
+                },
+               });
+            
+            setCoinData({
+                day: format(resDay.data.prices),
+                week: format(resWeek.data.prices),
+                 month: format(resMonth.data.prices)
+                });
+               
+             
+
+        };
+    
+        coinName ? fetchdata(): ""; 
+        
+    }, [coinName])
 
     const [ticker, setTicker] = React.useState();
     
@@ -57,6 +112,8 @@ export default function Coin() {
                 <div className="px-4 py-2 m-2 text-2xl">
                     Crypto Currency {coin} 💰
                 </div>
+
+                <div><PriceChart data ={coinData}/></div>
             
                 <div className=" bg-white shadow overflow-hidden sm:rounded w-2/4 justify-center items-center " >
                 <div className="px-4 py-5 sm:px-6">
@@ -76,7 +133,6 @@ export default function Coin() {
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Price $CAD</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} </dd>
-                
                     </div>
 
                     {/*add coin details through API - Market Cap*/}                  
