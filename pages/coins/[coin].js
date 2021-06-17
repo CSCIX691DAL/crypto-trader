@@ -6,10 +6,8 @@ import { useRouter } from 'next/router'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { purchase } from '../../services/transactions'
-
 import { useEffect } from 'react'
 import axios from 'axios'
-import {COIN_GECKO_URL} from '../../services/coins'
 import PriceChart from '../../components/PriceChart'
 
 
@@ -29,10 +27,10 @@ export default function Coin() {
     }
     const [coinData, setCoinData] = React.useState({})
     const format = data => {
-        return data.map(el => {
+        return data.map(e => {
             return {
-                t: el[0],
-                y: el[1].toFixed(2)
+                t: e[0],
+                y: e[1].toFixed(2)
             }
         })
     }
@@ -51,7 +49,7 @@ export default function Coin() {
                    days: "7",
                 },
                });
-               const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+               const resYear = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
                     vs_currency: "usd",
                    days: "365",
@@ -61,7 +59,7 @@ export default function Coin() {
             setCoinData({
                 day: format(resDay.data.prices),
                 week: format(resWeek.data.prices),
-                 month: format(resMonth.data.prices)
+                year: format(resYear.data.prices)
                 });
                
              
@@ -85,9 +83,9 @@ export default function Coin() {
                 <div className="px-4 py-2 m-2">
                     Here's some info about {coin} 💰
                 </div>
-                <div><PriceChart data ={coinData}/></div>
+
+                <div className = "px-6 py-6 w-1/2 ..."><PriceChart data ={coinData}/></div>
             
-                
                 <div className="items-center m-2">
                     <form>
                         <input type="number" min="0" placeholder="Amount" onChange={event => setAmount(event.target.value)} className="mr-2 border-b border-blue-500" />
