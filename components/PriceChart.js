@@ -5,10 +5,10 @@ import { historyOptions } from '../services/ChartConfig';
 
 const PriceChart = ({data}) => {
     const chartRef = useRef()
-    const{day,week,month} = data
+    const{day,week,year} = data
     const [time, setTimeFormat] = useState("24h");
 
-    const determineTimeFormat = () => {
+    const TimeFormat = () => {
         
 
     if(time === "24h"){
@@ -18,24 +18,32 @@ const PriceChart = ({data}) => {
         return week
     }
     else if(time === "1Y"){
-        return month 
+        return year 
     }
        
       };
 
     useEffect(() => {
+        
+        if (window.MyChart != undefined)
+{
+    window.MyChart.destroy();
+}
+ 
         if(chartRef && chartRef.current){
-            const chartInstance = new Chartjs(chartRef.current, {
+            window.MyChart = new Chartjs(chartRef.current, {
                 type: 'line', 
                 data: {
-                    labels: "price",
+
                     datasets :[
                         {
-                            data: determineTimeFormat(),
+                            label: "Price",
+                            data: TimeFormat(),
+                            backgroundColor: "rgba(44, 130, 201, 1)",
+                            borderWidth: 1,
                       
                             },
                     ],
-                    pointRadius: 0,
                     
                 },
                 options: {
@@ -46,12 +54,14 @@ const PriceChart = ({data}) => {
 
     })
     return (
-        <div className= "bg-white border mt-2 rounded p-3">
+
+        <div className= "bg-white border mt-2 rounded p-3 w-3">
+            
+        <div></div>
         <div>
-  
-            <canvas ref={chartRef} id= "myChart" width ={300} height = {300}></canvas>
+            <canvas ref={chartRef} id= "myChart" width ="250" height = "250"></canvas>
         </div>
-        <div className="chart-button mt-1">
+        
     
         <button
           onClick={() => setTimeFormat("24h")}
@@ -72,7 +82,6 @@ const PriceChart = ({data}) => {
           1Y
         </button>
       </div>
-    </div>
        
     )
 };
