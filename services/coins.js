@@ -20,9 +20,7 @@ export const getCoinInfo = async(id) => {
     const res = await axios.get(`${COIN_GECKO_URL}/coins/${id}`, {
         params: { params: { 
             id: id
-            // market_data: true,
-
-            
+            // market_data: true,  
         }}
     });
 

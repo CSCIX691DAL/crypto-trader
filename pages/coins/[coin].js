@@ -19,7 +19,6 @@ export default function Coin() {
         return MD5(session.user.email).toString(encoder);
     }
 
-// grab coin details/pics from CoinGecko
     const [ticker, setTicker] = React.useState();
     
     const [cap, setCap] = React.useState();
@@ -29,14 +28,14 @@ export default function Coin() {
 
     React.useEffect(() => {
         const getCoinDetails = async() => {
+            // grab coin details/pics from CoinGecko
             const data = await getCoinInfo({coin}.coin);
             
             setTicker(data.symbol);
             setPrice(data.market_data.current_price.cad);
             setCap(data.market_data.market_cap.cad);
             setVolume(data.market_data.total_volume.cad);
-            setSupply(data.market_data.circulating_supply);
-            
+            setSupply(data.market_data.circulating_supply); 
         }
     
         coinName ? getCoinDetails(): "" ;
@@ -54,7 +53,6 @@ export default function Coin() {
 
             <Header/>
 
-            
             <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center">
                 <div className="px-4 py-2 m-2 text-2xl">
                     Crypto Currency {coin} 💰
@@ -67,33 +65,33 @@ export default function Coin() {
                 </div>
                 <div className="border-t border-gray-200">
                     <dl>
- {/*add coin details through API - Ticker code:*/}  
-        
+
+                    {/*add coin details through API - Ticker code:*/}  
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500"> Ticker {coin}</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{ticker}</dd>
                     </div>
 
- {/*/*add coin details through API - Price in CAD Dollars (use this as standard)*/}  
+                    {/*/*add coin details through API - Price in CAD Dollars (use this as standard)*/}  
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Price $CAD</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} </dd>
                 
                     </div>
 
-{/*add coin details through API - Market Cap*/}                  
+                    {/*add coin details through API - Market Cap*/}                  
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Market Cap $CAD</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap}</dd>
                     </div>
 
-{/*add coin details through API - Volume (24h)*/}  
+                    {/*add coin details through API - Volume (24h)*/}  
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500"> Volume (24h) $CAD </dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume}</dd>
                     </div>
 
-{/*add coin details through API - Circulating supply*/}  
+                    {/*add coin details through API - Circulating supply*/}  
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">Circulating Supply</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {supply}  </dd>
@@ -116,10 +114,6 @@ export default function Coin() {
                 </div>
                 </div>
             </div>
-        
-
         </>
-
-        
     )
 }
