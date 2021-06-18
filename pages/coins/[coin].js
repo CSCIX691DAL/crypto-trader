@@ -101,7 +101,7 @@ export default function Coin() {
 
             <Header />
 
-            <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center">
+            <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center items-center">
                 <div className="px-4 py-2 m-2 text-2xl">
                     Crypto Currency {coin} 💰
                 </div>
