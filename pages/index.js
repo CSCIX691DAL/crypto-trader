@@ -64,11 +64,19 @@ export default function Home() {
                 (<div>Please login with Google above ☝</div>)
             }
         </main>
+        
+        
         <div className='m-8 flex font-normal text-base text-gray-800 '>
-            <h1 className='coin-text'>Coins Table</h1>
-            {coins.map(coin => {
+            <table className="m-auto w-2/5">
+            
+		
+                    {coins.map(coin => {
                 return <DashboardTableItem coin={coin} />  
+                
             })}
+           
+            </table>
+
         </div>
 
         </div>
