@@ -67,7 +67,7 @@ export default function Home() {
         
         
         <div className='m-8 flex font-normal text-base text-gray-800 '>
-            <table className="m-auto w-2/5">
+            <table className="m-auto w-1/2">
             
 		
                     {coins.map(coin => {

@@ -26,7 +26,7 @@ const DashboardTableItem = ({ coin }) => {
                                 {coin.price_change_percentage_24h.toFixed(2)}%</p>
                                 ):(
                                     <p className='coin-percent text-green-500'>
-                                {coin.price_change_percentage_24h.toFixed(2)}%</p>
+                                +{coin.price_change_percentage_24h.toFixed(2)}%</p>
                                 )}
                         </td>
                         <td> 
