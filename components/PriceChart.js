@@ -55,11 +55,11 @@ const PriceChart = ({data}) => {
     })
     return (
 
-        <div className= "bg-white border mt-2 rounded p-3 w-3">
+        <div className= "bg-white border mt-2 rounded p-3">
             
         <div></div>
         <div>
-            <canvas ref={chartRef} id= "myChart" width ="250" height = "250"></canvas>
+            <canvas ref={chartRef} id= "myChart" width = {250} height = {250}></canvas>
         </div>
         
     
