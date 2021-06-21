@@ -2,6 +2,8 @@ import axios from 'axios'
 import { getCoinInfo } from './coins'
 import { addTransactionToPortfolio } from './user'
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+
 const TRANSACTION_ROUTE = `/api/transactions`;
 let TRANSACTIONS_URL;
 try {
