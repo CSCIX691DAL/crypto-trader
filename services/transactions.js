@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getCoinInfo } from './coins'
 import { addTransactionToPortfolio } from './user'
 
-const TRANSACTIONS_URL = `https://crypto-trader-3l3f7n6gyq-nn.a.run.app/api/transactions`;
+const TRANSACTIONS_URL = `http://localhost:3000/api/transactions`;
 
 export const getTransactionListForUsers = async (userId) => {
     const res = await axios.get(`${TRANSACTIONS_URL}/${userId}`);
