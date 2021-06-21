@@ -2,16 +2,17 @@ import axios from 'axios'
 import { getCoinInfo } from './coins'
 import { addTransactionToPortfolio } from './user'
 
-const TRANSACTIONS_ROUTE = `/api/transactions`;
+const TRANSACTION_ROUTE = `/api/transactions`;
 let TRANSACTIONS_URL;
-if (window.location.hostname === 'localhost') {
-    // http://localhost:3000/api/transactions
-    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + ':3000' + TRANSACTIONS_ROUTE;
+try {
+    // http://localhost:3000/api/user
+    console.log("Local deployment:", window.location.protocol + '//' + window.location.hostname + TRANSACTION_ROUTE);
+    TRANSACTIONS_URL = 'http://localhost:3000' + TRANSACTION_ROUTE;
 }
-else {
+catch (error) {
     // google cloud deployment
-    console.log(window.location.protocol + '//' + window.location.hostname + TRANSACTIONS_ROUTE);
-    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + TRANSACTIONS_ROUTE;
+    console.log("GCP deployment:", 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + TRANSACTION_ROUTE);
+    TRANSACTIONS_URL = 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + TRANSACTION_ROUTE;
 }
 
 
