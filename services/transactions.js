@@ -2,21 +2,7 @@ import axios from 'axios'
 import { getCoinInfo } from './coins'
 import { addTransactionToPortfolio } from './user'
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
-
-const TRANSACTION_ROUTE = `/api/transactions`;
-let TRANSACTIONS_URL;
-try {
-    // http://localhost:3000/api/user
-    console.log("Local deployment:", window.location.protocol + '//' + window.location.hostname + TRANSACTION_ROUTE);
-    TRANSACTIONS_URL = 'http://localhost:3000' + TRANSACTION_ROUTE;
-}
-catch (error) {
-    // google cloud deployment
-    console.log("GCP deployment:", 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + TRANSACTION_ROUTE);
-    TRANSACTIONS_URL = 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + TRANSACTION_ROUTE;
-}
-
+const TRANSACTIONS_URL = `http://localhost:3000/api/transactions`;
 
 export const getTransactionListForUsers = async (userId) => {
     const res = await axios.get(`${TRANSACTIONS_URL}/${userId}`);

@@ -1,19 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
-
-const USER_ROUTE = `/api/transactions`;
-let USER_URL;
-try {
-    // http://localhost:3000/api/user
-    console.log("Local deployment:", window.location.protocol + '//' + window.location.hostname + USER_ROUTE);
-    USER_URL = 'http://localhost:3000' + USER_ROUTE;
-}
-catch (error) {
-    // google cloud deployment
-    console.log("GCP deployment:", 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + USER_ROUTE);
-    USER_URL = 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + USER_ROUTE;
-}
+const USER_URL = `http://localhost:3000/api/user`;
 
 export const getUser = async (userID) => {
     const res = await axios.get(`${USER_URL}/${userID}`);
@@ -49,6 +36,7 @@ export const addTransactionToPortfolio = async (hash, transaction) => {
 
 export const getUserHoldings = async (hash) => {
     const res = await axios.get(`${USER_URL}/${hash}`);
+    console.log(res);
     return {
         data:res.data.holdings
     }
