@@ -2,14 +2,15 @@ import axios from 'axios'
 
 const USER_ROUTE = `/api/transactions`;
 let USER_URL;
-if (window.location.hostname === 'localhost') {
+try {
     // http://localhost:3000/api/user
-    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + ':3000' + USER_ROUTE;
+    console.log("Local deployment:", window.location.protocol + '//' + window.location.hostname + USER_ROUTE);
+    USER_URL = 'http://localhost:3000' + USER_ROUTE;
 }
-else {
+catch (error) {
     // google cloud deployment
-    console.log(window.location.protocol + '//' + window.location.hostname + USER_ROUTE);
-    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + USER_ROUTE;
+    console.log("GCP deployment:", 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + USER_ROUTE);
+    USER_URL = 'https://crypto-trader-3l3f7n6gyq-nn.a.run.app' + USER_ROUTE;
 }
 
 export const getUser = async (userID) => {
