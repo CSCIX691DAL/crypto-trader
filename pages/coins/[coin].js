@@ -87,7 +87,6 @@ export default function Coin() {
         }
 
         coinName ? getCoinDetails() : "";
-        console.log({ coin }.coin);
 
     }, [coinName, cap, price, volume, supply, ticker]);
 

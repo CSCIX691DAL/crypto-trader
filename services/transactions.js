@@ -2,7 +2,18 @@ import axios from 'axios'
 import { getCoinInfo } from './coins'
 import { addTransactionToPortfolio } from './user'
 
-const TRANSACTIONS_URL = `http://localhost:3000/api/transactions`;
+const TRANSACTIONS_ROUTE = `/api/transactions`;
+let TRANSACTIONS_URL;
+if (window.location.hostname === 'localhost') {
+    // http://localhost:3000/api/transactions
+    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + ':3000' + TRANSACTIONS_ROUTE;
+}
+else {
+    // google cloud deployment
+    console.log(window.location.protocol + '//' + window.location.hostname + TRANSACTIONS_ROUTE);
+    TRANSACTIONS_URL = window.location.protocol + '//' + window.location.hostname + TRANSACTIONS_ROUTE;
+}
+
 
 export const getTransactionListForUsers = async (userId) => {
     const res = await axios.get(`${TRANSACTIONS_URL}/${userId}`);
