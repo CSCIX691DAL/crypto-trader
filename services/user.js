@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const USER_URL = `http://localhost:3000/api/user`;
+const USER_URL = `https://crypto-trader-3l3f7n6gyq-nn.a.run.app/api/user`;
 
 export const getUser = async (userID) => {
     const res = await axios.get(`${USER_URL}/${userID}`);
