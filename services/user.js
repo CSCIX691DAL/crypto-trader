@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const USER_URL = `/api/user`;
-
 const USER_ROUTE = `/api/transactions`;
 let USER_URL;
 if (window.location.hostname === 'localhost') {
