@@ -7,7 +7,6 @@ import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { purchase } from '../../services/transactions'
 import { getCoinInfo } from '../../services/coins'
-import { useEffect } from 'react'
 import axios from 'axios'
 import PriceChart from '../../components/PriceChart'
 
@@ -32,7 +31,7 @@ export default function Coin() {
         })
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchdata = async () => {
             const resDay = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
@@ -58,13 +57,9 @@ export default function Coin() {
                 week: format(resWeek.data.prices),
                 year: format(resYear.data.prices)
             });
-
-
-
         };
 
-        coinName ? fetchdata() : "";
-
+        coinName && fetchdata();
     }, [coinName])
 
     const [ticker, setTicker] = React.useState();
@@ -86,9 +81,7 @@ export default function Coin() {
             setSupply(data.market_data.circulating_supply);
         }
 
-        coinName ? getCoinDetails() : "";
-        console.log({ coin }.coin);
-
+        coinName && getCoinDetails();
     }, [coinName, cap, price, volume, supply, ticker]);
 
     return (
@@ -106,16 +99,15 @@ export default function Coin() {
                     Crypto Currency {coin} 💰
                 </div>
 
-                <div className="px-6 py-6 w-1/2 ..."><PriceChart data={coinData} /></div>
+                <div className="px-6 py-6 w-11/12 md:w-1/2 ..."><PriceChart data={coinData} /></div>
 
-                <div className=" bg-white shadow overflow-hidden sm:rounded w-2/4 justify-center items-center " >
+                <div className=" bg-white shadow overflow-hidden sm:rounded justify-center items-center w-11/12 md:w-1/2" >
                     <div className="px-4 py-5 sm:px-6">
                         <h3 className="text-lg leading-6 font-medium text-gray-900">{coin} Details</h3>
 
                     </div>
                     <div className="border-t border-gray-200">
                         <dl>
-
                             {/*add coin details through API - Ticker code:*/}
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-sm font-medium text-gray-500"> Ticker {coin}</dt>
@@ -161,12 +153,12 @@ export default function Coin() {
                                             )
                                         }
                                     </form>
-                                </div> 
                                 </div>
-                    </dl>
-                </div>
+                            </div>
+                        </dl>
                     </div>
                 </div>
             </div>
-            )
+        </div>
+    )
 }
