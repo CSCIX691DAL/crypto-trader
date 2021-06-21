@@ -18,7 +18,6 @@ export default function Home() {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
             const create = await createUser(hash, email, name);
-            console.log("Created user", create);
         }
     }
 
@@ -65,11 +64,19 @@ export default function Home() {
                 (<div>Please login with Google above ☝</div>)
             }
         </main>
+        
+        
         <div className='m-8 flex font-normal text-base text-gray-800 '>
-            <h1 className='coin-text'>Coins Table</h1>
-            {coins.map(coin => {
+            <table className="m-auto w-1/2">
+            
+		
+                    {coins.map(coin => {
                 return <DashboardTableItem coin={coin} />  
+                
             })}
+           
+            </table>
+
         </div>
 
         </div>
