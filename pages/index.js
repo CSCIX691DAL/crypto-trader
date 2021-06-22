@@ -11,13 +11,12 @@ import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.
 
 export default function Home() {
     const [user, setUser] = React.useState();
-    const [ session, loading ] = useSession();
-    
+    const [session, loading] = useSession();
 
-    const startSession = async(hash, email, name) => {
+    const startSession = async (hash, email, name) => {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
-            const create = await createUser(hash, email, name);
+            await createUser(hash, email, name);
         }
     }
 
@@ -28,7 +27,7 @@ export default function Home() {
 
     // get user info from Firebase
     React.useEffect(() => {
-        const getUserInfo = async(email) => {
+        const getUserInfo = async (email) => {
             let hash = MD5(email).toString(encoder);
             const res = await getUser(hash);
             setUser(res.data);
@@ -36,51 +35,42 @@ export default function Home() {
 
         getUserInfo(session ? MD5(session.user.email).toString(encoder) : '');
     }, []);
-    
+
 
     // grab coin details/pics from CoinGecko
     const [coins, setCoins] = React.useState([]);
     React.useEffect(() => {
-        const getCoinInfo = async() => {
+        const getCoinInfo = async () => {
             const data = await getDashboardInfo();
             setCoins(data);
         }
-
         getCoinInfo();
     }, []);
-        
+
     return (
         <div>
-        <Head>
-            <title>CryptoTrader</title>
-            <meta name="description" content="View prices and trade cryptocurrencies" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
+            <Head>
+                <title>CryptoTrader</title>
+                <meta name="description" content="View prices and trade cryptocurrencies" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-        <Header/>
-        <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
-            {session ? 
-                (<div>Welcome to the Dashboard, {session.user ? session.user.name.split(" ")[0] : ''} 🚀</div>) : 
-                (<div>Please login with Google above ☝</div>)
-            }
-        </main>
-        
-        
-        <div className='m-8 flex font-normal text-base text-gray-800 '>
-            <table className="m-auto w-1/2">
-            
-		
-                    {coins.map(coin => {
-                return <DashboardTableItem coin={coin} />  
-                
-            })}
-           
-            </table>
+            <Header />
+            <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
+                {session ?
+                    (<div>Welcome to the Dashboard, {session.user.name.split(" ")[0]} 🚀</div>) :
+                    (<div>Please login with Google above ☝</div>)
+                }
+            </main>
 
+            <div className='m-8 flex font-normal text-base text-gray-800 '>
+                <table className="m-auto w-11/12 md:w-1/2">
+                    {coins.map((coin, index) => {
+                        return <DashboardTableItem coin={coin} key={index} />
+                    })}
+                </table>
+            </div>
         </div>
-
-        </div>
-    
     )
 }
- 
+
