@@ -10,10 +10,16 @@ export const getUser = async (userID) => {
     };
 }
 
-export const createUser = async (hash, userEmail, userName) => {
+export const getAllUserIDs = async () => {
+    const res = await axios.get(`${USER_URL}`);
+    return res.data;
+}
+
+export const createUser = async (hash, userEmail, userName, password) => {
     const res = await axios.post(`${USER_URL}/${hash}`, {
         email: userEmail,
-        name: userName
+        name: userName,
+        password: password
     });
     return res.data;
 }
@@ -36,8 +42,5 @@ export const addTransactionToPortfolio = async (hash, transaction) => {
 
 export const getUserHoldings = async (hash) => {
     const res = await axios.get(`${USER_URL}/${hash}`);
-    console.log(res);
-    return {
-        data:res.data.holdings
-    }
+    return { data:res.data.holdings };
 }

@@ -8,7 +8,6 @@ import encoder from 'crypto-js/enc-hex'
 import { useSession } from 'next-auth/client'
 import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.js'
 
-
 export default function Home() {
     const [user, setUser] = React.useState();
     const [session, loading] = useSession();
@@ -16,7 +15,7 @@ export default function Home() {
     const startSession = async (hash, email, name) => {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
-            await createUser(hash, email, name);
+            await createUser(hash, email, name, "");
         }
     }
 
