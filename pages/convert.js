@@ -2,13 +2,14 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import { getDashboardInfo } from '../services/coins';
 import * as React from 'react'
+import { convertCrypto } from '../services/conversion';
 
 export default function Convert() {
   const [dropdown, setDropdown] = React.useState([]);
   const [convertFrom, setConvertFrom] = React.useState();
-  const [amountOfFirstCurr, setAmountOfFirstCurr] = React.useState(0);
-  const [amountOfSecondCurr, setAmountOfSecondCurr] = React.useState(0);
+  const [amountOfFirstCurr, setAmountOfFirstCurr] = React.useState(1);
   const [convertTo, setConvertTo] = React.useState();
+  const [convertedValue, setConvertedValue] = React.useState();
 
   React.useEffect(() => {
     const getInfo = async () => {
@@ -33,41 +34,43 @@ export default function Convert() {
 
         <div className="w-1/2 h-64 bg-blue-200">
           <select name="currencyFrom" id="currencyFrom" onChange={e => setConvertFrom(e.currentTarget.value)}>
+            <option disabled defaultValue selected> -- select an option -- </option>
             {dropdown && (
               dropdown.map((item, index) => {
                 return (
-                  <option key={index} value={item.id}>{item.name}</option>
+                  <option key={index} value={index}>{item.name}</option>
                 )
               })
             )}
           </select>
-          <div className="flex">
-            <div className="cursor-pointer" onClick={() => setAmountOfFirstCurr(amountOfFirstCurr - 1)}>➖</div>
-            {amountOfFirstCurr} 
-            <div className="cursor-pointer" onClick={() => setAmountOfFirstCurr(amountOfFirstCurr + 1)}>➕</div>
-            {convertFrom}
-          </div>
+            <div class="flex flex-col">
+              <div class="flex flex-row">
+                <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold"/>
+              </div>
+            </div>
         </div>
 
         <div className="w-1/2 h-64 bg-green-200">
           <select name="currencyTo" id="currencyTo" onChange={e => setConvertTo(e.currentTarget.value)}>
+            <option disabled defaultValue selected> -- select an option -- </option>
             {dropdown && (
               dropdown.map((item, index) => {
                 return (
-                  <option key={index} value={item.id}>{item.name}</option>
+                  <option key={index} value={index}>{item.name}</option>
                 )
               })
             )}
           </select>
-          <div className="flex">
-            <div className="cursor-pointer" onClick={() => setAmountOfSecondCurr(amountOfSecondCurr - 1)}>➖</div>
-            {amountOfSecondCurr} 
-            <div className="cursor-pointer" onClick={() => setAmountOfSecondCurr(amountOfSecondCurr + 1)}>➕</div>
-            {convertTo}
-          </div>
+
         </div>
 
+
       </main>
+      <button onClick={() => {
+        setConvertedValue(convertCrypto(dropdown[convertFrom], dropdown[convertTo], amountOfFirstCurr));
+      }} className="px-4 py-2 rounded-full bg-green-200">Convert</button>
+
+      <p>{convertedValue}</p>
     </div>
   )
 }
