@@ -34,7 +34,7 @@ export default function Convert() {
 
         <div className="w-1/2 h-64 bg-blue-200">
           <select name="currencyFrom" id="currencyFrom" onChange={e => setConvertFrom(e.currentTarget.value)}>
-          <option disabled defaultValue selected> -- select an option -- </option>
+            <option disabled defaultValue selected> -- select an option -- </option>
             {dropdown && (
               dropdown.map((item, index) => {
                 return (
@@ -43,16 +43,16 @@ export default function Convert() {
               })
             )}
           </select>
-          <div className="flex">
-            <div className="cursor-pointer" onClick={() => setAmountOfFirstCurr(amountOfFirstCurr - 1)}>➖</div>
-            {amountOfFirstCurr} 
-            <div className="cursor-pointer" onClick={() => setAmountOfFirstCurr(amountOfFirstCurr + 1)}>➕</div>
-          </div>
+            <div class="flex flex-col">
+              <div class="flex flex-row">
+                <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold"/>
+              </div>
+            </div>
         </div>
 
         <div className="w-1/2 h-64 bg-green-200">
           <select name="currencyTo" id="currencyTo" onChange={e => setConvertTo(e.currentTarget.value)}>
-          <option disabled defaultValue selected> -- select an option -- </option>
+            <option disabled defaultValue selected> -- select an option -- </option>
             {dropdown && (
               dropdown.map((item, index) => {
                 return (
