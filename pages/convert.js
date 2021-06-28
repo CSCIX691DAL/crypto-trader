@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import { getDashboardInfo } from '../services/coins';
+import { getDashboardInfo } from '../services/coins'
 import * as React from 'react'
-import { convertCrypto } from '../services/conversion';
+import { convertCrypto } from '../services/conversion'
+import Link from 'next/link'
 
 export default function Convert() {
   const [dropdown, setDropdown] = React.useState([]);
@@ -71,6 +72,10 @@ export default function Convert() {
       }} className="px-4 py-2 rounded-full bg-green-200">Convert</button>
 
       <p>{convertedValue}</p>
+
+      <button className="px-4 py-2 rounded-full bg-indigo-100">
+      <Link href="/portfolio">Buy crypto here!</Link>
+      </button>
     </div>
   )
 }
