@@ -73,9 +73,13 @@ export default function Convert() {
 
       <p>{convertedValue}</p>
 
-      <button className="px-4 py-2 rounded-full bg-indigo-100">
-      <Link href="/portfolio">Buy crypto here!</Link>
-      </button>
+      {dropdown[convertTo] && (
+        <button className="px-4 py-2 rounded-full bg-indigo-100">
+          Buy {dropdown[convertTo].id}
+        <Link href={`/coins/${dropdown[convertTo].name}`}> here!</Link>
+        </button>
+      )}
+      
     </div>
   )
 }
