@@ -46,7 +46,7 @@ export default function Convert() {
           </select>
           <div className="flex flex-col">
             <div className="flex flex-row">
-              <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
+              <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" className="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
             </div>
           </div>
         </div>
