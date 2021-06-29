@@ -44,11 +44,11 @@ export default function Convert() {
               })
             )}
           </select>
-            <div class="flex flex-col">
-              <div class="flex flex-row">
-                <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold"/>
-              </div>
+          <div className="flex flex-col">
+            <div className="flex flex-row">
+              <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
             </div>
+          </div>
         </div>
 
         <div className="w-1/2 h-64 bg-green-200">
@@ -74,12 +74,11 @@ export default function Convert() {
       <p>{convertedValue}</p>
 
       {dropdown[convertTo] && (
-        <button className="px-4 py-2 rounded-full bg-indigo-100">
-          Buy {dropdown[convertTo].id}
-        <Link href={`/coins/${dropdown[convertTo].name}`}> here!</Link>
+        <button className="px-4 py-2 rounded-full bg-indigo-100 animate-bounce">
+          <Link href={`/coins/${dropdown[convertTo].id}`}><a>Click here to buy {dropdown[convertTo].id}</a></Link>
         </button>
       )}
-      
+
     </div>
   )
 }
