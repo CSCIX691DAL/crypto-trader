@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import { getDashboardInfo } from '../services/coins';
+import { getDashboardInfo } from '../services/coins'
 import * as React from 'react'
-import { convertCrypto } from '../services/conversion';
+import { convertCrypto } from '../services/conversion'
+import Link from 'next/link'
 
 export default function Convert() {
   const [dropdown, setDropdown] = React.useState([]);
@@ -43,11 +44,11 @@ export default function Convert() {
               })
             )}
           </select>
-            <div class="flex flex-col">
-              <div class="flex flex-row">
-                <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" class="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold"/>
-              </div>
+          <div className="flex flex-col">
+            <div className="flex flex-row">
+              <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" className="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
             </div>
+          </div>
         </div>
 
         <div className="w-1/2 h-64 bg-green-200">
@@ -71,6 +72,13 @@ export default function Convert() {
       }} className="px-4 py-2 rounded-full bg-green-200">Convert</button>
 
       <p>{convertedValue}</p>
+
+      {dropdown[convertTo] && (
+        <button className="px-4 py-2 rounded-full bg-indigo-100 animate-bounce">
+          <Link href={`/coins/${dropdown[convertTo].id}`}><a>Click here to buy {dropdown[convertTo].id}</a></Link>
+        </button>
+      )}
+
     </div>
   )
 }
