@@ -14,7 +14,7 @@ export default function Convert() {
 
   React.useEffect(() => {
     const getInfo = async () => {
-      const data = await getDashboardInfo();
+      const data = await getDashboardInfo(15);
       setDropdown(data);
     }
 
