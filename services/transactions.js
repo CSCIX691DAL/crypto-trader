@@ -41,7 +41,7 @@ export const createTransaction = async(hash, coinName, amount) => {
 
     // make sure both requests went through
     if (res1.status === 200 && res2.status === 200) {
-        alert("Purchase successful");
+        alert("Transaction successful");
     }
 
 }
@@ -49,7 +49,8 @@ export const createTransaction = async(hash, coinName, amount) => {
 export const purchase = async (coinName, count, userId) => {
 
     // user must enter something before proceeding
-    if (count === 0 || count === 'amount') {
+    if (count <= 0 || count === 'amount') {
+        alert("Enter a positive number. Cannot purchase less than 0.")
         return false;
     }
 
@@ -60,6 +61,31 @@ export const purchase = async (coinName, count, userId) => {
     }
 
     createTransaction(userId, coinName, count);
+    
+    // return false so page isn't refreshed
+    return false;
+}
+
+export const sell = async (coinName, heldAmount, amountSold, userId) => {
+
+    // user must enter something before proceeding
+    if (amountSold <= 0 || amountSold === 'amount') {
+        alert("Error: enter a positive number. Cannot sell less than 0.")
+        return false;
+    }
+
+    if (heldAmount < amountSold) {
+        alert("Error: can't sell more than you currently hold. Enter a smaller number.");
+        return false;
+    }
+
+    // confirm the purchase with the user
+    let upperName = coinName.charAt(0).toUpperCase() + coinName.slice(1);
+    if (!confirm("Are you sure you want to sell " + amountSold + " " + upperName + "?")) {
+        return false;
+    }
+
+    createTransaction(userId, coinName, amountSold * -1);
     
     // return false so page isn't refreshed
     return false;
