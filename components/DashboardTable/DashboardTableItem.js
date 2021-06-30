@@ -6,7 +6,7 @@ const DashboardTableItem = ({ coin }) => {
         <div>
             <Link key={coin.id} href={`/coins/${coin.id}`}>
                 <div className="cursor-pointer">
-                    <div className=" flex py-2 mb-1 border border-gray-200 hover:border-gray-900">
+                    <div className=" flex  justify-start py-2 mb-1 border border-gray-200 hover:border-gray-900">
                         <div className='w-8/12 align-middle coin flex-initial'>
                             <td className="px-4">
                                 <p><img className="h-10 w-10" src={coin.image} alt="crypto" /></p>
@@ -18,9 +18,10 @@ const DashboardTableItem = ({ coin }) => {
                                 <p className='coin-symbol uppercase text-gray-500'>{coin.symbol}</p>
                             </td>
                         </div>
-
-                        <div className=" py-2 align-middle flex-initial">
-                            <td className="px-10" >
+                            <div className="  w-2/12 py-2 align-middle flex-auto flex-grow ">
+                                
+                             <td className="float-right" >
+                                
                                 {coin.price_change_percentage_24h < 0 ? (
                                     <p className='coin-percent text-red-500'>
                                         {coin.price_change_percentage_24h.toFixed(2)}%</p>
@@ -28,11 +29,19 @@ const DashboardTableItem = ({ coin }) => {
                                     <p className='coin-percent text-green-500'>
                                         +{coin.price_change_percentage_24h.toFixed(2)}%</p>
                                 )}
+                            
                             </td>
-                            <td>
+                            
+                            </div>
+                            
+                            <div className=" ml-10  w-2/12 align-middle flex-auto flex-grow">
+                            <td className=""> 
+                                <div className=" ml-auto  py-2 align-middle flex-auto flex-grow">
                                 <p className="font-bold pr-4 justify-end">${coin.current_price.toFixed(2)}</p>
+                                </div>
                             </td>
-                        </div>
+                            </div> 
+                        
                     </div>
                 </div>
             </Link>

@@ -47,30 +47,64 @@ export default function Portfolio() {
             <Header />
             <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
                 {session ?
-                    (<div>This is where you'll see your portfolio, {session.user.name.split(" ")[0]} 📈</div>) :
+                    (<div>
+                        <h1>My Portfolio 📈</h1> 
+                        </div>) :
                     (<div>Please login with Google above ☝</div>)
                 }
             </main>
-            <div>
-                <h2>Holdings:</h2>
-                {holdings &&
-                    Object.entries(holdings).map(([key, value]) => {
-                        return <HoldingsItem name={key} count={value} />
-                    })
-                }
-            </div>
+            <div >
+                <div className='m-8 flex flex-col font-normal text-base text-gray-800 '>  
 
-            <div>
-                <h2>Recent Transactions:</h2>
-                {transactions.map(transaction => {
+                    <table className="m-auto w-11/12 md:w-1/2">
+                    <h1  className = "m-auto my-5 font-bold">Holdings:</h1>
+
+                        <div className="flex bg-blue-200 py-2 border border-blue-300 hover:border-blue-900">
+                            <div className = "w-6/12   font-bold">
+                                <th className="pl-4" >Coins</th>
+                            </div>
+                            <div className = "w-3/12 float-left font-bold">
+                                <th className="pl-4">Quantity</th>
+                            </div>
+                            <div className = " w-3/12 font-bold float-left">
+                                <th className="  pl-4">Total Value</th>
+                            </div>
+                        </div>
+                        <div>
+                            {holdings &&
+                                Object.entries(holdings).map(([key, value]) => {
+                                    return <HoldingsItem name={key} count={value} />
+                                })
+                            }
+                        </div>
+                    </table>
+                </div>
+            </div>
+            <div className='m-8 flex flex-col font-normal text-base text-gray-800 '>
+                <table className="m-auto w-11/12 md:w-1/2">
+                <h1  className = "m-auto my-5 font-bold">Recent Transactions:</h1>
+
+                <div className="flex bg-blue-200 py-2 border border-blue-300 hover:border-blue-900">
+                            <div className = "w-7/12   font-bold">
+                                <th className="pl-4" >Coins</th>
+                            </div>
+                            <div className = "w-3/12 float-left font-bold">
+                                <th className="pl-6">Quantity</th>
+                            </div>
+                            <div className = " w-2/12 font-bold float-left">
+                                <th className=" pl-4">Total</th>
+                            </div>
+                        </div>
+                    {transactions.map(transaction => {
                     return <TransactionsItem transaction={transaction} />
-                })}
+                    })}   
+                </table>
             </div>
 
             <div>
-                <h2>Watchlist:</h2>
-
-            </div>
+                <h1  className = "ml-96 my-5 font-bold">Watchlist:</h1>
+                          </div>
+            
         </div>
     )
 }
