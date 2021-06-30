@@ -41,7 +41,7 @@ export default function Home() {
     const [coins, setCoins] = React.useState([]);
     React.useEffect(() => {
         const getCoinInfo = async () => {
-            const data = await getDashboardInfo();
+            const data = await getDashboardInfo(50);
             setCoins(data);
         }
         getCoinInfo();
