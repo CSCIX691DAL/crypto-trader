@@ -57,7 +57,7 @@ export default function Portfolio() {
             <div className="py-4">
             <table className="m-auto w-5/12 py-2">
                 <tbody>
-                    <tr className="m-auto my-5 font-bold">Holdings:</tr>
+                    <tr className="m-auto my-5 font-bold"><tr>Holdings:</tr></tr>
 
                     <tr className="flex bg-blue-200 py-2 border border-blue-300">
                         <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
@@ -78,7 +78,7 @@ export default function Portfolio() {
             <div className="py-4">
             <table className="m-auto w-5/12 py-2">
                 <tbody>
-                    <tr className = "m-auto my-5 font-bold">Recent Transactions:</tr>
+                    <tr className = "m-auto my-5 font-bold"><tr>Recent Transactions:</tr></tr>
 
                     <tr className="flex bg-blue-200 py-2 border border-blue-300">
                         <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
