@@ -8,15 +8,15 @@ import encoder from 'crypto-js/enc-hex'
 import { useSession } from 'next-auth/client'
 import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.js'
 
-
 export default function Home() {
     const [user, setUser] = React.useState();
     const [session, loading] = useSession();
+    const [search, setSearch] = React.useState("");
 
     const startSession = async (hash, email, name) => {
         const checkIfUserExists = await getUser(hash);
         if (!checkIfUserExists.data) {
-            await createUser(hash, email, name);
+            await createUser(hash, email, name, "");
         }
     }
 
@@ -41,7 +41,7 @@ export default function Home() {
     const [coins, setCoins] = React.useState([]);
     React.useEffect(() => {
         const getCoinInfo = async () => {
-            const data = await getDashboardInfo();
+            const data = await getDashboardInfo(50);
             setCoins(data);
         }
         getCoinInfo();
@@ -63,9 +63,20 @@ export default function Home() {
                 }
             </main>
 
-            <div className="m-8 flex font-normal text-base text-gray-800">
-                <div className="m-auto w-5/12">
-                    {coins.map((coin, index) => {
+            <div className='m-8 flex flex-col font-normal text-base text-gray-800 '>
+                <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto"
+                    type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
+
+                <table className="m-auto w-11/12 md:w-1/2">
+                    {coins.filter(coin => {
+                        if (search === "") {
+                            return coin;
+                        } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+                            return coin;
+                        } else {
+                            return false;
+                        }
+                    }).map((coin, index) => {
                         return <DashboardTableItem coin={coin} key={index} />
                     })}
                 </div>
