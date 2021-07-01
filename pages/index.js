@@ -79,7 +79,7 @@ export default function Home() {
                     }).map((coin, index) => {
                         return <DashboardTableItem coin={coin} key={index} />
                     })}
-                </div>
+                </table>
             </div>
         </div>
     )
