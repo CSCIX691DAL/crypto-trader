@@ -15,7 +15,7 @@ const HoldingsItem = ({ name, count }) => {
         }
 
          getCoinDetails();
-    }, [  price, ticker]);
+    }, [price, ticker]);
 
     return (
 
