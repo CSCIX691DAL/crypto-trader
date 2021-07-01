@@ -63,12 +63,12 @@ export default function Home() {
                 }
             </main>
 
-            <div className='m-8 flex font-normal text-base text-gray-800 '>
-                <table className="m-auto w-11/12 md:w-1/2">
+            <div className="m-8 flex font-normal text-base text-gray-800">
+                <div className="m-auto w-5/12">
                     {coins.map((coin, index) => {
                         return <DashboardTableItem coin={coin} key={index} />
                     })}
-                </table>
+                </div>
             </div>
         </div>
     )
