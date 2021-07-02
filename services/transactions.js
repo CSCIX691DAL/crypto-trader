@@ -41,7 +41,9 @@ export const createTransaction = async(hash, coinName, amount) => {
 
     // make sure both requests went through
     if (res1.status === 200 && res2.status === 200) {
-        window.location.href = "success";
+        window.location.href = "/success";
+    } else {
+        alert("Something went wrong, please try again")
     }
 
 }
