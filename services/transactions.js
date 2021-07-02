@@ -71,8 +71,8 @@ export const purchase = async (coinName, count, userId) => {
 export const sell = async (coinName, heldAmount, amountSold, userId) => {
 
     // user must enter something before proceeding
-    if (amountSold <= 0 || amountSold === 'amount') {
-        alert("Error: enter a positive number. Cannot sell less than 0.")
+    if (amountSold <= 0 || amountSold === 'amount' || amountSold === undefined) {
+        alert("Error: enter a valid positive number. Cannot sell less than 0.")
         return false;
     }
 
