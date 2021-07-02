@@ -24,17 +24,15 @@ export default function Portfolio() {
             setTransactions(userTransactions);
         }
 
-        getTransactions();
-    }, []);
-
-    React.useEffect(() => {
         const getHoldings = async () => {
             const userHoldings = await getUserHoldings(hashEmail());
             setHoldings(userHoldings.data);
         }
 
         getHoldings();
+        getTransactions();
     }, []);
+
 
     return (
         <div>
@@ -47,30 +45,53 @@ export default function Portfolio() {
             <Header />
             <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
                 {session ?
-                    (<div>This is where you'll see your portfolio, {session.user.name.split(" ")[0]} 📈</div>) :
+                    (<div>
+                        <h1>My Portfolio 📈</h1>
+                    </div>) :
                     (<div>Please login with Google above ☝</div>)
                 }
             </main>
-            <div>
-                <h2>Holdings:</h2>
-                {holdings &&
-                    Object.entries(holdings).map(([key, value]) => {
-                        return <HoldingsItem name={key} count={value} />
-                    })
-                }
+
+            <div className="py-4">
+                <table className="m-auto w-10/12 md:w-6/12 py-2">
+                    <tbody>
+                        <tr className="m-auto my-5 font-bold"><tr>Holdings:</tr></tr>
+
+                        <tr className="flex bg-blue-200 py-2 border border-blue-300">
+                            <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
+                            <td className="w-4/12 font-bold items-start">Quantity</td>
+                            <td className="w-4/12 font-bold items-start">Total Value</td>
+                        </tr>
+                        {holdings &&
+                            (Object.entries(holdings).map(([key, value]) => {
+                                return <HoldingsItem name={key} count={value} />
+                            }))
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="py-4">
+                <table className="m-auto w-10/12 md:w-6/12 py-2">
+                    <tbody>
+                        <tr className="m-auto my-5 font-bold"><tr>Recent Transactions:</tr></tr>
+
+                        <tr className="flex bg-blue-200 py-2 border border-blue-300">
+                            <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
+                            <td className="w-4/12 font-bold items-start">Quantity</td>
+                            <td className="w-4/12 font-bold items-start">Transaction Total</td>
+                        </tr>
+                        {transactions.map(transaction => {
+                            return <TransactionsItem transaction={transaction} />
+                        })}
+                    </tbody>
+                </table>
             </div>
 
             <div>
-                <h2>Recent Transactions:</h2>
-                {transactions.map(transaction => {
-                    return <TransactionsItem transaction={transaction} />
-                })}
+                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
             </div>
 
-            <div>
-                <h2>Watchlist:</h2>
-
-            </div>
         </div>
     )
 }
