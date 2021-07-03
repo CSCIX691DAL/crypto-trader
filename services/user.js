@@ -83,29 +83,29 @@ export const addTransactionToPortfolio = async (hash, transaction) => {
  */
 export const getUserHoldings = async (hash) => {
     const res = await axios.get(`${USER_URL}/${hash}`);
-    return { data:res.data.holdings };
+    return { data: res.data.holdings };
 }
-export const addtoDatabase = async(coin,hash) => {
-    const res = await axios.post(`${USER_URL}/WatchList/${hash}`,{
-        coin : coin.coin_name
+export const addtoDatabase = async (coin, hash) => {
+    const res = await axios.post(`${USER_URL}/WatchList/${hash}`, {
+        coin: coin.coin_name
     });
-    return{
-        data:res.data,
-        status:res.status
+    return {
+        data: res.data,
+        status: res.status
     }
 }
 
-export const addtoWatchList = async (coinName,hash) => {
-   const coin = {
-       coin_name : coinName
-   }
-   const res1 = await addtoDatabase(coin,hash)
-   if (res1.status === 200) {
-    alert("added to watchlist");
-}
+export const addtoWatchList = async (coinName, hash) => {
+    const coin = {
+        coin_name: coinName
+    }
+    const res1 = await addtoDatabase(coin, hash)
+    if (res1.status === 200) {
+        alert("added to watchlist");
+    }
 }
 export const getUserWatchlist = async (hash) => {
     const res = await axios.get(`${USER_URL}/${hash}`);
-    return { data:res.data.watchlist };
+    return { data: res.data.watchlist };
 }
 
