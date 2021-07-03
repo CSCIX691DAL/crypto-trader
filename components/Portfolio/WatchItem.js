@@ -1,9 +1,12 @@
 import React from 'react'
 
-export const WatchListItem = (watch) => {
+const WatchItem = ({name}) => {
     return (
         <div>
+            coin Name : {name}
             
         </div>
     )
 }
+
+export default WatchItem

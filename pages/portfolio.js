@@ -8,6 +8,8 @@ import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import TransactionsItem from '../components/Portfolio/TransactionsItem'
 import HoldingsItem from '../components/Portfolio/HoldingsItem'
+import WatchItem from '../components/Portfolio/WatchItem'
+
 
 /**
  * A user's portfolio:
@@ -37,11 +39,13 @@ export default function Portfolio() {
         const getHoldings = async () => {
             const userHoldings = await getUserHoldings(hashEmail());
             setHoldings(userHoldings.data);
+            
         }
 
         const getWatchlist = async () => {
             const userWatchlist = await getUserWatchlist(hashEmail());
             setWatchlist(userWatchlist.data)
+            
         }
         
         getWatchlist();
@@ -119,7 +123,15 @@ export default function Portfolio() {
             </div>
 
             <div>
-                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>           
+                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
+                {watchlist &&
+                            (Object.entries(watchlist).map(([key]) => {
+                                return <WatchItem name={key} />
+                            }))
+                        }
+            
+                
+    
             </div>
 
         </div>
