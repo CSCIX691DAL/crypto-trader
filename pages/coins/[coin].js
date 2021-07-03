@@ -147,9 +147,9 @@ export default function Coin() {
                                         <input type="number" min="0" placeholder="Amount" onChange={event => setAmount(event.target.value)} className="mr-2 border-b border-blue-500" />
                                         {
                                             session ? (
-                                                <button onClick={() => purchase({ coin }.coin, (amount ? amount : 0), hashEmail())} className="rounded-xl p-2 bg-blue-500 text-white" type="button">Purchase</button>
+                                                <button onClick={() => purchase({ coin }.coin, (amount ? amount : 0), hashEmail())} className="rounded-xl p-2 bg-blue-500 text-white " type="button">Purchase</button>
                                             ) : (
-                                                <button className="rounded-xl p-2 bg-gray-200 text-white" type="button">Purchase</button>
+                                                <button className="rounded-xl p-2 bg-gray-200 text-white m-2" type="button">Purchase</button>
                                             )
                                         }
                                     </form>
