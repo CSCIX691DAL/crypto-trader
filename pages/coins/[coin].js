@@ -9,6 +9,7 @@ import { purchase } from '../../services/transactions'
 import { getCoinInfo } from '../../services/coins'
 import axios from 'axios'
 import PriceChart from '../../components/PriceChart'
+import { addtoWatchList} from '../../services/user'
 
 export default function Coin() {
     const [session, loading] = useSession();
@@ -152,6 +153,7 @@ export default function Coin() {
                                                 <button className="rounded-xl p-2 bg-gray-200 text-white" type="button">Purchase</button>
                                             )
                                         }
+                                        <button onClick={() => addtoWatchList(coinName,hashEmail())}> Add to Watchlist </button>
                                     </form>
                                 </div>
                             </div>

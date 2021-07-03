@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import { useSession } from 'next-auth/client'
 import * as React from 'react'
 import { getTransactionListForUsers } from '../services/transactions'
-import { getUserHoldings } from '../services/user'
+import { getUserHoldings, getUserWatchlist } from '../services/user'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import TransactionsItem from '../components/Portfolio/TransactionsItem'
@@ -13,6 +13,7 @@ export default function Portfolio() {
     const [session, loading] = useSession();
     const [transactions, setTransactions] = React.useState([]);
     const [holdings, setHoldings] = React.useState({});
+    const [watchlist,setWatchlist] = React.useState({});
 
     const hashEmail = () => {
         return MD5(session ? session.user.email : '').toString(encoder);
@@ -29,6 +30,12 @@ export default function Portfolio() {
             setHoldings(userHoldings.data);
         }
 
+        const getWatchlist = async () => {
+            const userWatchlist = await getUserWatchlist(hashEmail());
+            setWatchlist(userWatchlist.data)
+        }
+        
+        getWatchlist();
         getHoldings();
         getTransactions();
     }, []);
@@ -89,7 +96,7 @@ export default function Portfolio() {
             </div>
 
             <div>
-                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
+                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>           
             </div>
 
         </div>
