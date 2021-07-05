@@ -35,19 +35,25 @@ export default function Coin() {
         const fetchdata = async () => {
             const resDay = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "1",
                 },
             });
             const resWeek = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "7",
+                },
+            });
+            const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+                params: {
+                    vs_currency: "cad",
+                    days: "31",
                 },
             });
             const resYear = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "365",
                 },
             });
@@ -55,6 +61,7 @@ export default function Coin() {
             setCoinData({
                 day: format(resDay.data.prices),
                 week: format(resWeek.data.prices),
+                month: format(resMonth.data.prices),
                 year: format(resYear.data.prices)
             });
         };
