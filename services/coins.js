@@ -5,7 +5,7 @@ const COIN_GECKO_URL = `https://api.coingecko.com/api/v3/`;
 export const getDashboardInfo = async(number_per_page) => {
     const res = await axios.get(`${COIN_GECKO_URL}/coins/markets`, {
         params: {
-            vs_currency: "usd",
+            vs_currency: "cad",
             order: "market_cap_desc",
             per_page: number_per_page,
             page: 1,

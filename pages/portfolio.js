@@ -42,7 +42,12 @@ export default function Portfolio() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
+
             <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
                 {session ?
                     (<div>

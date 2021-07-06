@@ -11,7 +11,11 @@ export default function Success() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
 
             <div className="mt-16 flex flex-col text-lg items-center">
                 <p className="font-semibold text-gray-800">Transaction successful!</p>

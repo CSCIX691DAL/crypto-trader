@@ -55,33 +55,41 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
-            <main className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
-                {session ?
-                    (<div>Welcome to the Dashboard, {session.user.name.split(" ")[0]} 🚀</div>) :
-                    (<div>Please login with Google above ☝</div>)
-                }
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
+
+            <main>
+                <div className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
+                    {session ?
+                        (<div>Welcome to the Dashboard, {session.user.name.split(" ")[0]} 🚀</div>) :
+                        (<div>Please login with Google above ☝</div>)
+                    }
+                </div>
+
+                <div className="m-8 flex flex-col font-normal text-base text-gray-800">
+                    <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto sticky top-24"
+                        type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
+
+                    <table className="m-auto w-11/12 md:w-1/2">
+                        {coins.filter(coin => {
+                            if (search === "") {
+                                return coin;
+                            } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+                                return coin;
+                            } else {
+                                return false;
+                            }
+                        }).map((coin, index) => {
+                            return <DashboardTableItem coin={coin} key={index} />
+                        })}
+                    </table>
+                </div>
             </main>
-
-            <div className='m-8 flex flex-col font-normal text-base text-gray-800 '>
-                <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto"
-                    type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
-
-                <table className="m-auto w-11/12 md:w-1/2">
-                    {coins.filter(coin => {
-                        if (search === "") {
-                            return coin;
-                        } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-                            return coin;
-                        } else {
-                            return false;
-                        }
-                    }).map((coin, index) => {
-                        return <DashboardTableItem coin={coin} key={index} />
-                    })}
-                </table>
-            </div>
         </div>
+
     )
 }
 
