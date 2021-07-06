@@ -113,7 +113,7 @@ export default function Coin() {
 
             <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center items-center">
                 <div className="px-4 py-2 m-2 text-4xl">
-                     {coin.charAt(0).toUpperCase() + coinName.slice(1)} 
+                     {coinName ? coinName.charAt(0).toUpperCase() + coinName.slice(1) : ""} 
                 </div>
 
                 <div className="px-6 py-6 w-11/12 md:w-1/2 ..."><PriceChart data={coinData} /></div>
