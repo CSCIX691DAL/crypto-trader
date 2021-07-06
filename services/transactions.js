@@ -24,7 +24,7 @@ export const addTransactionToUser = async (hash, transaction) => {
 
 export const createTransaction = async(hash, coinName, amount) => {
     const coinInfo = await getCoinInfo(coinName);
-    const totalPrice = amount * coinInfo.market_data.current_price.usd;
+    const totalPrice = amount * coinInfo.market_data.current_price.cad;
 
     const transaction = {
         num_purchased: amount,

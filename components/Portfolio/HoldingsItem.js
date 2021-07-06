@@ -38,7 +38,7 @@ const HoldingsItem = ({ name, count }) => {
                 
             <td className="w-4/12"> 
                 <div className=" ml-auto align-middle flex-auto flex-grow">
-                    <p className="font-bold pr-4 justify-end">${(price*count).toFixed(2)}</p>
+                    <p className="font-bold pr-4 justify-end">${(price*count).toFixed(2)} CAD</p>
                 </div>
                 <form>
                 <input type="number" min="0" placeholder="Amount" onChange={event => setAmount(event.target.value)} />

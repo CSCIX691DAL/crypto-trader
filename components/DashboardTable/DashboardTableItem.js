@@ -27,7 +27,7 @@ const DashboardTableItem = ({ coin }) => {
                             
                         <div className="ml-4 w-2/12 align-middle flex-auto">
                             <div className=" ml-auto py-2 align-middle flex-auto">
-                                <p className="font-bold">${coin.current_price.toFixed(2)}</p>
+                                <p className="font-bold">${coin.current_price.toFixed(2)} CAD</p>
                             </div>
                         </div> 
                     </div>

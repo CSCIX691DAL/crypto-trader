@@ -28,12 +28,12 @@ const TransactionItem = ({ transaction }) => {
             </td>
 
             <td className="w-4/12">
-                <p>Purachased {transaction.num_purchased} @ ${(transaction.total_transaction/transaction.num_purchased).toFixed(2)}</p>    
+                <p>Purchased {transaction.num_purchased} @ ${(transaction.total_transaction/transaction.num_purchased).toFixed(2)} CAD</p>    
             </td>
                 
             <td className="w-4/12"> 
                 <div className=" ml-auto align-middle flex-auto flex-grow">
-                    <p className="font-bold pr-4 justify-end">${transaction.total_transaction}</p>
+                    <p className="font-bold pr-4 justify-end">${transaction.total_transaction} CAD</p>
                 </div>
             </td>
         </tr>

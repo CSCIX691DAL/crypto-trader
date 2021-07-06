@@ -6,7 +6,7 @@ export default function Header() {
 
     return(
         <>
-            <div className="px-auto py-4 bg-blue-500 text-white flex ">
+            <div className="px-auto py-4 bg-blue-500 text-white flex fixed w-full m-0">
                 <div className="text-4xl px-4">
                     CryptoTrader
                 </div>
