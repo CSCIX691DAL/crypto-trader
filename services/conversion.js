@@ -1,5 +1,5 @@
 export const convertCrypto = (convertFrom, convertTo, amountOfFirstCurr) => {
-    if (convertFrom && convertTo) {
+    if (convertFrom && convertTo && amountOfFirstCurr) {
         const ratio = convertFrom.current_price / convertTo.current_price;
         const res = ratio * amountOfFirstCurr;
 
