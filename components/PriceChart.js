@@ -14,7 +14,7 @@ const PriceChart = ({ data }) => {
     else if (time === "7d") {
       return week
     }
-    else if (time === "1m") {
+    else if (time === "1M") {
       return month
     }
     else if (time === "1Y") {
@@ -70,7 +70,7 @@ const PriceChart = ({ data }) => {
         7D
       </button>
       <button
-        onClick={() => setTimeFormat("31d")}
+        onClick={() => setTimeFormat("1M")}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded mr-5"
       >
         1M
