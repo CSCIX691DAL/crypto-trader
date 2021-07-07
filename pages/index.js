@@ -69,13 +69,9 @@ export default function Home() {
 
                 <table className="m-auto w-11/12 md:w-1/2">
                     {coins.filter(coin => {
-                        if (search === "") {
-                            return coin;
-                        } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-                            return coin;
-                        } else {
-                            return false;
-                        }
+                        if (search === "") return coin;
+                        else if (coin.name.toLowerCase().includes(search.toLowerCase())) return coin; 
+                        else return false;
                     }).map((coin, index) => {
                         return <DashboardTableItem coin={coin} key={index} />
                     })}
