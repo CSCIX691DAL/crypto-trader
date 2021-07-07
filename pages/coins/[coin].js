@@ -99,11 +99,15 @@ export default function Coin() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
 
             <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center items-center">
                 <div className="px-4 py-2 m-2 text-4xl">
-                     {coin} 
+                     {coin.charAt(0).toUpperCase() + coinName.slice(1)} 
                 </div>
 
                 <div className="px-6 py-6 w-11/12 md:w-1/2 ..."><PriceChart data={coinData} /></div>
@@ -117,26 +121,26 @@ export default function Coin() {
                         <dl>
                             {/*add coin details through API - Ticker code:*/}
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500"> Ticker {coin}</dt>
+                                <dt className="text-sm font-medium text-gray-500"> Ticker</dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{ticker}</dd>
                             </div>
 
                             {/*/*add coin details through API - Price in CAD Dollars (use this as standard)*/}
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Price $CAD</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} </dd>
+                                <dt className="text-sm font-medium text-gray-500">Price</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Market Cap*/}
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Market Cap $CAD</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap}</dd>
+                                <dt className="text-sm font-medium text-gray-500">Market Cap</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Volume (24h)*/}
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500"> Volume (24h) $CAD </dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume}</dd>
+                                <dt className="text-sm font-medium text-gray-500"> Volume (24h)</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Circulating supply*/}
