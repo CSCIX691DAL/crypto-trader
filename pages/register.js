@@ -3,8 +3,10 @@ import * as React from 'react'
 import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { getAllUserIDs, createUser } from '../services/user'
-import { execOnce } from 'next/dist/next-server/lib/utils'
 
+/**
+ * User registration page - for users who don't have a Google account
+ */
 export default function Register() {
     const [ firstName , setFirstName ] = React.useState(1);
     const [ lastName , setLastName ] = React.useState(2);

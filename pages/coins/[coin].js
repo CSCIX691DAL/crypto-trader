@@ -10,6 +10,11 @@ import { getCoinInfo } from '../../services/coins'
 import axios from 'axios'
 import PriceChart from '../../components/PriceChart'
 
+/**
+ * Webpage for viewing detailed information about a cryptocurrency
+ * 
+ * Uses information from CoinGecko
+ */
 export default function Coin() {
     const [session, loading] = useSession();
     const router = useRouter();

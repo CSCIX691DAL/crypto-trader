@@ -8,6 +8,11 @@ import encoder from 'crypto-js/enc-hex'
 import { useSession } from 'next-auth/client'
 import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.js'
 
+/**
+ * Dashboard page - displays information about the top 20 cryptocurrencies
+ * 
+ * Uses information from CoinGecko
+ */
 export default function Home() {
     const [user, setUser] = React.useState();
     const [session, loading] = useSession();

@@ -2,6 +2,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Header from '../components/Header'
 
+/**
+ * Page notifying user of a successful transaction
+ */
 export default function Success() {
     return (
         <>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { getCoinInfo } from '../../services/coins'
 
-
+/**
+ * Layout for a single transaction's data for Portfolio page
+ */
 const TransactionItem = ({ transaction }) => {
 
     const [ticker, setTicker] = React.useState();
