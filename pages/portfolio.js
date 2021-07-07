@@ -17,6 +17,7 @@ export default function Portfolio() {
     const [transactions, setTransactions] = React.useState([]);
     const [holdings, setHoldings] = React.useState({});
     const [watchlist,setWatchlist] = React.useState({});
+    const [search, setSearch] = React.useState("");
 
     const hashEmail = () => {
         return MD5(session ? session.user.email : '').toString(encoder);
@@ -65,17 +66,25 @@ export default function Portfolio() {
             </main>
 
             <div className="py-4">
+                
                 <table className="m-auto w-10/12 md:w-6/12 py-2">
                     <tbody>
                         <tr className="m-auto my-5 font-bold"><tr>Holdings:</tr></tr>
-
+                        <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto"
+                    type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
                         <tr className="flex bg-blue-200 py-2 border border-blue-300">
                             <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
                             <td className="w-4/12 font-bold items-start">Quantity</td>
                             <td className="w-4/12 font-bold items-start">Total Value</td>
                         </tr>
                         {holdings &&
-                            (Object.entries(holdings).map(([key, value]) => {
+                            (Object.entries(holdings)
+                            .filter(coin => {
+                                if (search === "") return coin;
+                                else if (coin[0].toLowerCase().includes(search.toLowerCase())) return coin;
+                                else return false;
+                            })
+                            .map(([key, value]) => {
                                 return <HoldingsItem name={key} count={value} />
                             }))
                         }

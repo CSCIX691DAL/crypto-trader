@@ -59,15 +59,21 @@ const PriceChart = ({ data }) => {
 
       <button
         onClick={() => setTimeFormat("24h")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded ml-40 mr-5"
       >
-        24h
+        24H
       </button>
       <button
         onClick={() => setTimeFormat("7d")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded mr-5"
       >
-        7d
+        7D
+      </button>
+      <button
+        onClick={() => setTimeFormat("31d")}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded mr-5"
+      >
+        1M
       </button>
 
       <button
@@ -78,7 +84,7 @@ const PriceChart = ({ data }) => {
       
       <button
         onClick={() => setTimeFormat("1Y")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded mr-5" 
       >
         1Y
       </button>
