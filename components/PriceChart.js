@@ -4,7 +4,7 @@ import { historyOptions } from '../services/ChartConfig';
 
 const PriceChart = ({ data }) => {
   const chartRef = React.useRef()
-  const { day, week, year } = data
+  const { day, week, month, year } = data
   const [time, setTimeFormat] = React.useState("24h");
 
   const TimeFormat = () => {
@@ -13,6 +13,9 @@ const PriceChart = ({ data }) => {
     }
     else if (time === "7d") {
       return week
+    }
+    else if(time ==="1M"){
+      return month
     }
     else if (time === "1Y") {
       return year
@@ -66,6 +69,13 @@ const PriceChart = ({ data }) => {
       >
         7d
       </button>
+
+      <button
+        onClick={() => setTimeFormat("1M")}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+      >1M</button>
+      
+      
       <button
         onClick={() => setTimeFormat("1Y")}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"

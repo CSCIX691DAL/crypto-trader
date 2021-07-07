@@ -11,6 +11,7 @@ import HoldingsItem from '../components/Portfolio/HoldingsItem'
 import WatchItem from '../components/Portfolio/WatchItem'
 
 
+
 export default function Portfolio() {
     const [session, loading] = useSession();
     const [transactions, setTransactions] = React.useState([]);
@@ -103,7 +104,7 @@ export default function Portfolio() {
                 <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
                 {watchlist &&
                             (Object.entries(watchlist).map(([key]) => {
-                                return <WatchItem name={key} />
+                                return <WatchItem name={key}  />
                             }))
                         }
             
