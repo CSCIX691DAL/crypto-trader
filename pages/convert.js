@@ -8,7 +8,7 @@ import Link from 'next/link'
 export default function Convert() {
   const [dropdown, setDropdown] = React.useState([]);
   const [convertFrom, setConvertFrom] = React.useState();
-  const [amountOfFirstCurr, setAmountOfFirstCurr] = React.useState(1);
+  const [amountOfFirstCurr, setAmountOfFirstCurr] = React.useState();
   const [convertTo, setConvertTo] = React.useState();
   const [convertedValue, setConvertedValue] = React.useState();
 
@@ -47,19 +47,21 @@ export default function Convert() {
                             
            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 "> Select Currency one: </dd>
 
-            <select name="currencyFrom" id="currencyFrom" onChange={e => setConvertFrom(e.currentTarget.value)}>
+            <select name="currencyFrom" id="currencyFrom" onChange={e => {
+              setConvertFrom(e.currentTarget.value);
+              setConvertedValue(convertCrypto(dropdown[e.currentTarget.value], dropdown[convertTo], amountOfFirstCurr)); 
+            }}>
               <option disabled defaultValue selected> - Coin 1 - </option>
                 {dropdown && (
-                  dropdown.map((item, index) => {
-                  return (
-                   <option key={index} value={index}>{item.name}</option>
-                     )
-                     })
-                     )}
+                  dropdown.map((item, index) => <option key={index} value={index}>{item.name}</option>
+                ))}
               </select>
               <div className=" justify-center items-center">
                 <div className="flex flex-row">
-                   <input onChange={e => setAmountOfFirstCurr(e.currentTarget.value)} type="number" name="price" className="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
+                   <input onChange={e => {
+                     setAmountOfFirstCurr(e.currentTarget.value);
+                     setConvertedValue(convertCrypto(dropdown[convertFrom], dropdown[convertTo], e.currentTarget.value));
+                   }} type="number" name="price" className="bg-grey-lighter text-grey-darker py-2 rounded text-grey-darkest border border-grey-lighter rounded-l-none font-bold" />
                     </div>
               </div>                  
           </div>
@@ -69,14 +71,13 @@ export default function Convert() {
                             
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3 py-2"> Select Currency two: </dd>
                  
-            <select name="currencyTo" id="currencyTo" onChange={e => setConvertTo(e.currentTarget.value)}>
+            <select name="currencyTo" id="currencyTo" onChange={e => {
+              setConvertTo(e.currentTarget.value);
+              setConvertedValue(convertCrypto(dropdown[convertFrom], dropdown[e.currentTarget.value], amountOfFirstCurr));
+            }}>
             <option disabled defaultValue selected> - Coin 2 - </option>
             {dropdown && (
-              dropdown.map((item, index) => {
-                return (
-                  <option key={index} value={index}>{item.name}</option>
-                )
-              })
+              dropdown.map((item, index) => <option key={index} value={index}>{item.name}</option>)
             )}
           </select>
               <div className=" justify-center items-center">
@@ -90,26 +91,14 @@ export default function Convert() {
               </div>                  
           </div>
 
- {/*---------------------Convert button & output values---------------------*/}
-              <div className="flex m-10 justify-center bg-gray-50">
-                               
-                <button onClick={() => {
-                  setConvertedValue(convertCrypto(dropdown[convertFrom], dropdown[convertTo], amountOfFirstCurr));
-                  }} className="px-10 py-2 rounded-full bg-blue-300 shadow">Convert</button>
-
-              </div>
-
+ {/*---------------------Output values---------------------*/}
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6">
-                <dt className=" text-lg text-gray-800 font-semibold text-center"><p>{convertedValue}</p></dt>
-                                
+                <dt className=" text-lg text-gray-800 font-semibold text-center"><p>{convertedValue}</p></dt>  
               </div>
             </dl>
           </div>
         </div>
       </div>
-      
-
-  
     </div>
   )
 }
