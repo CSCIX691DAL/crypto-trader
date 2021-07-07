@@ -66,9 +66,10 @@ export default function Portfolio() {
                         <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto"
                     type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
                         <tr className="flex bg-blue-200 py-2 border border-blue-300">
-                            <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
-                            <td className="w-4/12 font-bold items-start">Quantity</td>
-                            <td className="w-4/12 font-bold items-start">Total Value</td>
+                            <td className="w-6/12 px-2 font-bold items-start" >Coin</td>
+                            <td className="w-1/12 font-bold items-start">Quantity</td>
+                            <td className="w-2/12 font-bold items-start">Total Value</td>
+                            <td className="w-3/12 font-bold items-start">Sell</td>
                         </tr>
                         {holdings &&
                             (Object.entries(holdings)
@@ -91,9 +92,9 @@ export default function Portfolio() {
                         <tr className="m-auto my-5 font-bold"><tr>Recent Transactions:</tr></tr>
 
                         <tr className="flex bg-blue-200 py-2 border border-blue-300">
-                            <td className="w-4/12 px-2 font-bold items-start" >Coin</td>
-                            <td className="w-4/12 font-bold items-start">Quantity</td>
-                            <td className="w-4/12 font-bold items-start">Transaction Total</td>
+                            <td className="w-6/12 px-2 font-bold items-start" >Coin</td>
+                            <td className="w-3/12 font-bold items-start">Quantity</td>
+                            <td className="w-3/12 font-bold items-start">Transaction Total</td>
                         </tr>
                         {transactions.map(transaction => {
                             return <TransactionsItem transaction={transaction} />
