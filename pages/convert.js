@@ -5,6 +5,11 @@ import * as React from 'react'
 import { convertCrypto } from '../services/conversion'
 import Link from 'next/link'
 
+/**
+ * Webpage for converting between two cryptocurrencies
+ * 
+ * Uses information from CoinGecko
+ */
 export default function Convert() {
     const [dropdown, setDropdown] = React.useState([]);
     const [convertFrom, setConvertFrom] = React.useState();

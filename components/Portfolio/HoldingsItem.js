@@ -6,7 +6,9 @@ import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { useSession } from 'next-auth/client'
 
-
+/**
+ * Layout for a single holding's data for Portfolio page
+ */
 const HoldingsItem = ({ name, count }) => {
     const [ticker, setTicker] = React.useState();
     const [price, setPrice] = React.useState();

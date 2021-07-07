@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
+/**
+ * Page header - links to each page, place to login/logout
+ */
 export default function Header() {
     const [ session, loading ] = useSession()
 

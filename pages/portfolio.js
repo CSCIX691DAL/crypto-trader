@@ -9,6 +9,14 @@ import encoder from 'crypto-js/enc-hex'
 import TransactionsItem from '../components/Portfolio/TransactionsItem'
 import HoldingsItem from '../components/Portfolio/HoldingsItem'
 
+/**
+ * A user's portfolio:
+ *   - holdings
+ *   - transactions
+ *   - watchlist
+ * 
+ * Uses information from CoinGecko
+ */
 export default function Portfolio() {
     const [session, loading] = useSession();
     const [transactions, setTransactions] = React.useState([]);

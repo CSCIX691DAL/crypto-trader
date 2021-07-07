@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 
+/**
+ * Layout for a single coin's data for Dashboard page
+ */
 const DashboardTableItem = ({ coin }) => {
     return (
         <div>

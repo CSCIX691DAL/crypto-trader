@@ -2,6 +2,11 @@ import * as React from 'react'
 import Chartjs from 'chart.js'
 import { historyOptions } from '../services/ChartConfig';
 
+/**
+ * Chart for displaying historical price data for a cryptocurrency
+ * 
+ * Uses information from CoinGecko
+ */
 const PriceChart = ({ data }) => {
   const chartRef = React.useRef()
   const { day, week, month, year } = data
