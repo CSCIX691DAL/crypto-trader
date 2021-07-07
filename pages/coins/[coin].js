@@ -9,7 +9,7 @@ import { purchase } from '../../services/transactions'
 import { getCoinInfo } from '../../services/coins'
 import axios from 'axios'
 import PriceChart from '../../components/PriceChart'
-import { addtoWatchList} from '../../services/user'
+import { addtoWatchList } from '../../services/user'
 
 /**
  * Webpage for viewing detailed information about a cryptocurrency
@@ -169,7 +169,7 @@ export default function Coin() {
                                                 <button className="rounded-xl p-2 bg-gray-200 text-white" type="button">Purchase</button>
                                             )
                                         }
-                                        <button onClick={() => addtoWatchList(coinName,hashEmail())}> Add to Watchlist </button>
+                                        <button onClick={() => addtoWatchList(coinName, hashEmail())} className="mr-2 rounded-xl p-2 bg-blue-500 text-white" > Add to Watchlist </button>
                                     </form>
                                 </div>
                             </div>

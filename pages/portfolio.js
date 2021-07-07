@@ -126,7 +126,7 @@ export default function Portfolio() {
                 <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
                 {watchlist &&
                             (Object.entries(watchlist).map(([key]) => {
-                                return <WatchItem name={key} />
+                                return <WatchItem name={key}  />
                             }))
                         }
             

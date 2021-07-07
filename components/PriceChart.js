@@ -80,6 +80,13 @@ const PriceChart = ({ data }) => {
       >
         1M
       </button>
+
+      <button
+        onClick={() => setTimeFormat("1M")}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+      >1M</button>
+      
+      
       <button
         onClick={() => setTimeFormat("1Y")}
         className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
