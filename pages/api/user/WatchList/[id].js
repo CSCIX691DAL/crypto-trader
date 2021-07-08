@@ -10,8 +10,7 @@ export default async (req, res) => {
         }
         else if (req.method === 'POST') {
             // increment the value if it exists, otherwise create it
-            await db.collection('users').doc(id).update({["watchlist." + req.body.coin]: req.body.coin
-        })
+            await db.collection('users').doc(id).update({["watchlist." + req.body.coin]: req.body.coin})
                 .then(() => {
                     res.status(200).json({
                         message: "Added to watchList"

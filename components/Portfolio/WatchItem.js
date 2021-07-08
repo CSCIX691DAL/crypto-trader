@@ -51,7 +51,6 @@ const WatchItem = ({name}) => {
                     </div>
                 </div>
             </Link>
-            {/* <div>CHECK:{percentage}</div> */}
         </div>
     )
 }
