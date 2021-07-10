@@ -35,19 +35,25 @@ export default function Coin() {
         const fetchdata = async () => {
             const resDay = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "1",
                 },
             });
             const resWeek = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "7",
+                },
+            });
+            const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+                params: {
+                    vs_currency: "cad",
+                    days: "31",
                 },
             });
             const resYear = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "365",
                 },
             });
@@ -55,6 +61,7 @@ export default function Coin() {
             setCoinData({
                 day: format(resDay.data.prices),
                 week: format(resWeek.data.prices),
+                month: format(resMonth.data.prices),
                 year: format(resYear.data.prices)
             });
         };
@@ -95,8 +102,8 @@ export default function Coin() {
             <Header />
 
             <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center items-center">
-                <div className="px-4 py-2 m-2 text-2xl">
-                    Crypto Currency {coin} 💰
+                <div className="px-4 py-2 m-2 text-4xl">
+                     {coin} 
                 </div>
 
                 <div className="px-6 py-6 w-11/12 md:w-1/2 ..."><PriceChart data={coinData} /></div>

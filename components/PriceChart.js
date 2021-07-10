@@ -4,7 +4,7 @@ import { historyOptions } from '../services/ChartConfig';
 
 const PriceChart = ({ data }) => {
   const chartRef = React.useRef()
-  const { day, week, year } = data
+  const { day, week, month, year } = data
   const [time, setTimeFormat] = React.useState("24h");
 
   const TimeFormat = () => {
@@ -13,6 +13,9 @@ const PriceChart = ({ data }) => {
     }
     else if (time === "7d") {
       return week
+    }
+    else if (time === "1M") {
+      return month
     }
     else if (time === "1Y") {
       return year
@@ -56,19 +59,25 @@ const PriceChart = ({ data }) => {
 
       <button
         onClick={() => setTimeFormat("24h")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
       >
-        24h
+        24H
       </button>
       <button
         onClick={() => setTimeFormat("7d")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
       >
-        7d
+        7D
+      </button>
+      <button
+        onClick={() => setTimeFormat("1M")}
+        className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
+      >
+        1M
       </button>
       <button
         onClick={() => setTimeFormat("1Y")}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-4 rounded"
+        className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
       >
         1Y
       </button>
