@@ -120,13 +120,15 @@ export default function Portfolio() {
                 </table>
             </div>
 
-            <div>
-                <h1 className="ml-96 my-5 font-bold">Watchlist:</h1>
+            <div className="py-4">
+                <table className="m-auto w-10/12 md:w-6/12 py-2">
+                <h1 className="m-auto my-5 font-bold">Watchlist:</h1>
                 {watchlist &&
                     (Object.entries(watchlist).map(([key]) => {
                         return <WatchItem name={key}  />
                     }))
                 }
+                </table>
             </div>
 
         </div>
