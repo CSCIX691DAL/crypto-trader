@@ -51,9 +51,6 @@ export default function Portfolio() {
         getTransactions();
     }, []);
 
-    const dt = new Date();
-    var fetchdate = dt.toLocaleString();
-
     return (
         <div>
             <Head>
@@ -101,8 +98,8 @@ export default function Portfolio() {
                                 else if (coin[0].toLowerCase().includes(search.toLowerCase())) return coin;
                                 else return false;
                             })
-                            .map(([key, value]) => {
-                                return <HoldingsItem name={key} count={value} />
+                            .map(([key, value], index) => {
+                                return <HoldingsItem key={index} name={key} count={value} />
                             }))
                         }
                     </tbody>
@@ -120,8 +117,8 @@ export default function Portfolio() {
                             <td className="w-3/12 py-2 font-bold items-start">Transaction Total</td>
                         </tr>
 
-                        {transactions.map(transaction => {
-                         return <TransactionsItem transaction={transaction} />
+                        {transactions.map((transaction, key) => {
+                         return <TransactionsItem key={key} transaction={transaction} />
                     })}
                     </tbody>
                 </table>
@@ -131,19 +128,19 @@ export default function Portfolio() {
                 </div>
 
                 <table className="m-auto w-full py-2">
-                    <tr className="flex  bg-blue-200 py-2 border border-blue-300">
-                        <td className="w-8/12 p-2 font-bold items-start" ><span className="mr-5">Coin</span></td>
-                        <td className="w-2/12 py-2 font-bold items-start">Change</td>
-                        <td className="w-2/12 py-2 font-bold items-start">Price</td>
-                    </tr>
+                    <tbody>
+                        <tr className="flex  bg-blue-200 py-2 border border-blue-300">
+                            <td className="w-8/12 p-2 font-bold items-start" ><span className="mr-5">Coin</span></td>
+                            <td className="w-2/12 py-2 font-bold items-start">Change</td>
+                            <td className="w-2/12 py-2 font-bold items-start">Price</td>
+                        </tr>
+                    </tbody>
                 {watchlist &&
-                    (Object.entries(watchlist).map(([key]) => {
-                        return <WatchItem name={key}  />
+                    (Object.entries(watchlist).map(([key], index) => {
+                        return <WatchItem name={key} key={index} />
                     }))
                 }
                 </table>
-
-
         </div>
         </div>
     )
