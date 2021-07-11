@@ -83,17 +83,17 @@ export default function Home() {
 
 
                 <div className="m-8 flex flex-col font-normal text-base text-gray-800">
-                    <div className="m-auto  w-/12 md:w-8/12 py-2 sticky top-15">
+                    <div className="m-auto  w-11/12 md:w-6/12 py-2 sticky top-15">
                         
                                 
-                        <tr className="flex bg-blue-200 py-2 border border-blue-300 m-2">
+                        <tr className="flex bg-blue-200 py-2 border border-blue-300 m-auto">
 
                             <tr className= "flex font-bold text-2xl m-auto py-1">
                                 COINS 
                             </tr>
                             <tr className= "ml-2 py-2">
                                 
-                                <span className="font-semibold">As of {fetchdate}</span>                           
+                                <span className="font-semibold text-sm">As of {fetchdate}</span>                           
                             </tr>
 
                             <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3 m-auto "
