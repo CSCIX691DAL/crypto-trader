@@ -63,26 +63,26 @@ const PriceChart = ({ data }) => {
 
             <button
                 onClick={() => setTimeFormat("24h")}
-                className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
+                className="mt-4 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded"
             >
                 24h
             </button>
 
             <button
                 onClick={() => setTimeFormat("7d")}
-                className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
+                className="mt-4 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded"
             >
                 7d
             </button>
 
             <button
                 onClick={() => setTimeFormat("1M")}
-                className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
+                className="mt-4 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded"
             >1M</button>
 
             <button
                 onClick={() => setTimeFormat("1Y")}
-                className="mt-5 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 p-1 rounded"
+                className="mt-4 m-0.5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded"
             >
                 1Y
             </button>
