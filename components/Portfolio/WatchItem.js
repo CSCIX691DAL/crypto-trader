@@ -24,7 +24,7 @@ const WatchItem = ({name}) => {
     return (
         <Link key={name} href={`/coins/${name}`}>
             <tbody className="cursor-pointer">
-                <tr className=" flex justify-start py-2 mb-1 border border-gray-200 hover:border-gray-900">
+                <tr className=" flex justify-start py-2 border border-gray-200 hover:border-gray-900">
                     <td className='w-8/12 align-middle coin flex-initial'> 
                         <h1 className="px-2 capitalize font-bold inline align-middle">{name}</h1>
                         <p className="align-middle coin-symbol uppercase text-gray-500 inline">{ticker}</p>
