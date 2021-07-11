@@ -14,15 +14,15 @@ import DashboardTableItem from '../components/DashboardTable/DashboardTableItem.
  * Uses information from CoinGecko
  */
 export default function Home() {
-    
+
     const [user, setUser] = React.useState();
     const [session, loading] = useSession();
     const [search, setSearch] = React.useState("");
-    
+
     const dt = new Date();
     var fetchdate = dt.toLocaleString();
-    
-    
+
+
 
     const startSession = async (hash, email, name) => {
         const checkIfUserExists = await getUser(hash);
@@ -79,39 +79,39 @@ export default function Home() {
                         (<div>Please login with Google above ☝</div>)
                     }
                 </div>
-                </main>
+            </main>
 
 
-                <div className="m-8 flex flex-col font-normal text-base text-gray-800">
-                    <div className="m-auto w-6/12 py-2 sticky top-15">       
-                        <div className="flex bg-blue-200 p-2 border border-blue-300 m-2">
+            <div className="m-8 flex flex-col font-normal text-base text-gray-800">
+                <div className="m-auto w-6/12 py-2 sticky top-16">
+                    <div className="flex bg-blue-200 p-2 border border-blue-300">
 
-                            <div className= "flex font-bold text-2xl m-auto py-1 w-1/12 pl-1">
-                                Coins
-                            </div>
-                            <div className= "ml-2 py-2 w-7/12">
-                                <span className="text-sm">As of {fetchdate}</span>                               
-                            </div>
-
-                            <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3"
-                                type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
+                        <div className="flex font-bold text-2xl m-auto py-1 w-1/12 pl-1">
+                            Coins
+                        </div>
+                        <div className="ml-2 py-2 w-7/12">
+                            <span className="text-sm">As of {fetchdate}</span>
                         </div>
 
+                        <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3"
+                            type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
+                    </div>
                 </div>
-                    <table className="m-auto w-11/12 md:w-1/2">
-                        {coins.filter(coin => {
-                            if (search === "") {
-                                return coin;
-                            } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-                                return coin;
-                            } else {
-                                return false;
-                            }
-                        }).map((coin, index) => {
-                            return <DashboardTableItem coin={coin} key={index} />
-                        })}
-                    </table>
-                </div>
+
+                <table className="m-auto w-11/12 md:w-1/2">
+                    {coins.filter(coin => {
+                        if (search === "") {
+                            return coin;
+                        } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+                            return coin;
+                        } else {
+                            return false;
+                        }
+                    }).map((coin, index) => {
+                        return <DashboardTableItem coin={coin} key={index} />
+                    })}
+                </table>
+            </div>
         </div>
 
     )

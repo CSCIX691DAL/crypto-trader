@@ -114,7 +114,7 @@ export default function Portfolio() {
                
                 <table className="m-auto w-full py-2">
                     <tbody>
-                        <tr className="flex py-2 bg-blue-200 py-2 border border-blue-300">
+                        <tr className="flex py-2 bg-blue-200 border border-blue-300">
                             <td className="w-6/12 py-2 px-2 font-bold items-start" >Coin</td>
                             <td className="w-3/12 py-2 font-bold items-start">Quantity</td>
                             <td className="w-3/12 py-2 font-bold items-start">Transaction Total</td>

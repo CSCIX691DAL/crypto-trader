@@ -16,6 +16,7 @@ const WatchItem = ({name}) => {
             setPrice(data.market_data.current_price.cad);
             setImage(data.image.small);
             setPercentage(data.market_data.price_change_percentage_24h);
+            
         }
 
         getCoinDetails();
@@ -31,7 +32,7 @@ const WatchItem = ({name}) => {
                         </div>
 
                         <div className="w-2/12 py-2 align-middle flex-auto">
-                                {price < 0 ? (
+                                {percentage < 0 ? (
                                     <p className="coin-percent text-red-500">
                                         {percentage && percentage.toFixed(2)}%</p>
                                 ) : (
