@@ -19,8 +19,8 @@ export default function Home() {
     const [session, loading] = useSession();
     const [search, setSearch] = React.useState("");
     
-    var dt = new Date();
-    // document.getElementById("datetime").innerHTML = dt.toLocaleString();
+    const dt = new Date();
+    var fetchdate = dt.toLocaleString();
     
     
 
@@ -66,45 +66,55 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
-            <main className="m-6 flex font-semibold text-lg text-gray-800 justify-center">
-                {session ?
-                    (<div>Welcome to the Dashboard, {session.user.name.split(" ")[0]} 🚀</div>) :
-                    (<div>Please login with Google above ☝</div>)
-                }
-            </main>
-{/*-------------------------------------------*/ }
-            <div className="py-4">
-                <div className="m-auto w-10/12 md:w-8/12 py-2 sticky top-2">
-                    
-                              
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
+
+            <main>
+                <div className="m-8 flex font-semibold text-lg text-gray-800 justify-center">
+                    {session ?
+                        (<div>Welcome to the Dashboard, {session.user.name.split(" ")[0]} 🚀</div>) :
+                        (<div>Please login with Google above ☝</div>)
+                    }
+                </div>
+                </main>
+
+
+                <div className="m-8 flex flex-col font-normal text-base text-gray-800">
+                    <div className="m-auto  w-/12 md:w-8/12 py-2 sticky top-15">
+                        
+                                
                         <tr className="flex bg-blue-200 py-2 border border-blue-300 m-2">
 
+                            <tr className= "flex font-bold text-2xl m-auto py-1">
+                                COINS 
+                            </tr>
                             <tr className= "ml-2 py-2">
                                 
-                                <span id="datetime"></span>                           
+                                <span className="font-semibold">As of {fetchdate}</span>                           
                             </tr>
 
-                            <tr className= "flex font-bold text-2xl m-auto py-1">
-                                COINS
-                            </tr>
-                        
                             <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3 m-auto "
                                 type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
                         </tr>
 
                 </div>
-
-                    <table className="m-auto w-1/2">
+                    <table className="m-auto w-11/12 md:w-1/2">
                         {coins.filter(coin => {
-                            if (search === "") return coin;
-                            else if (coin.name.toLowerCase().includes(search.toLowerCase())) return coin; 
-                            else return false;
-                             }).map((coin, index) => {
-                              return <DashboardTableItem coin={coin} key={index} />
-                            })}
+                            if (search === "") {
+                                return coin;
+                            } else if (coin.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+                                return coin;
+                            } else {
+                                return false;
+                            }
+                        }).map((coin, index) => {
+                            return <DashboardTableItem coin={coin} key={index} />
+                        })}
                     </table>
-            </div>
+                </div>
         </div>
 
     )
