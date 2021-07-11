@@ -83,22 +83,19 @@ export default function Home() {
 
 
                 <div className="m-8 flex flex-col font-normal text-base text-gray-800">
-                    <div className="m-auto  w-/12 md:w-8/12 py-2 sticky top-15">
-                        
-                                
-                        <tr className="flex bg-blue-200 py-2 border border-blue-300 m-2">
+                    <div className="m-auto w-6/12 py-2 sticky top-15">       
+                        <div className="flex bg-blue-200 p-2 border border-blue-300 m-2">
 
-                            <tr className= "flex font-bold text-2xl m-auto py-1">
-                                COINS 
-                            </tr>
-                            <tr className= "ml-2 py-2">
-                                
-                                <span className="font-semibold">As of {fetchdate}</span>                           
-                            </tr>
+                            <div className= "flex font-bold text-2xl m-auto py-1 w-1/12 pl-1">
+                                Coins
+                            </div>
+                            <div className= "ml-2 py-2 w-7/12">
+                                <span className="text-sm">As of {fetchdate}</span>                               
+                            </div>
 
-                            <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3 m-auto "
+                            <input className="border-2 border-gray-300 bg-white h-10 px-1 rounded-lg text-sm focus:outline-none w-1/3"
                                 type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
-                        </tr>
+                        </div>
 
                 </div>
                     <table className="m-auto w-11/12 md:w-1/2">

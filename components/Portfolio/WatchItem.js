@@ -25,20 +25,17 @@ const WatchItem = ({name}) => {
             <Link key={name} href={`/coins/${name}`}>
                 <div className="cursor-pointer">
                     <div className=" flex justify-start py-2 mb-1 border border-gray-200 hover:border-gray-900">
-                        <div className='w-6/12 align-middle coin flex-initial'>
-                            <span className="px-2">
-                                <img className="h-10 w-10 inline" src={image} alt="crypto" />
-                            </span>  
+                        <div className='w-8/12 align-middle coin flex-initial'> 
                             <h1 className="px-2 capitalize font-bold inline align-middle">{name}</h1>
                             <p className="align-middle coin-symbol uppercase text-gray-500 inline">{ticker}</p>
                         </div>
 
-                        <div className="w-4/12 py-2 align-middle flex-auto">
+                        <div className="w-2/12 py-2 align-middle flex-auto">
                                 {price < 0 ? (
-                                    <p className="coin-percent text-red-500 float-right">
+                                    <p className="coin-percent text-red-500">
                                         {percentage && percentage.toFixed(2)}%</p>
                                 ) : (
-                                    <p className="coin-percent text-green-500 float-right">
+                                    <p className="coin-percent text-green-500">
                                         +{percentage && percentage.toFixed(2)}%</p>
                                 )}
                         </div>

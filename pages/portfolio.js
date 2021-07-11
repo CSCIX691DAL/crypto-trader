@@ -81,13 +81,15 @@ export default function Portfolio() {
                 <div className="m-auto ">
                 <h1 className=" my-5 font-bold">Holdings:</h1>
                 </div>
+
+                <input className="border-2 border-gray-300 bg-white h-9 px-5 rounded-lg text-sm focus:outline-none w-auto mr-0"
+                                type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} />
             
                 <table className="m-auto w-full">
                     <tbody>
                     <tr className="flex  bg-blue-200 py-2 border border-blue-300">
                         <td className="w-6/12 px-2 font-bold items-start" ><span className="mr-5">Coins </span>
-                        <input className="border-2 border-gray-300 bg-white h-9 px-5 rounded-lg text-sm focus:outline-none w-auto mr-0"
-                                type="search" name="search" placeholder="Search" onChange={e => setSearch(e.currentTarget.value)} /></td>
+                        </td>
                         <td className="w-1/12 py-2 font-bold items-start">Quantity</td>
                         <td className="w-2/12 py-2 font-bold px-2 items-end">Total Value</td>
                         <td className="w-3/12 py-2 font-bold items-start">Sell</td>
@@ -123,19 +125,16 @@ export default function Portfolio() {
                     })}
                     </tbody>
                 </table>
+
                  <div className="m-auto">   
                     <h1 className="m-auto my-5 font-bold">Watchlist:</h1>  
                 </div>
+
                 <table className="m-auto w-full py-2">
                     <tr className="flex  bg-blue-200 py-2 border border-blue-300">
-                        <th className="w-3/12 py-2 font-bold items-start" ><span className="mr-5">Coins </span></th>
-                        <th className="w-5/12 py-2 font-semibold px-2 items-end">As of {fetchdate}</th>
-                        <th className="w-3/12 py-1 font-bold items-start">
-                            
-                            {/* Seach box can be added here */}
-                            Add search box here
-                        
-                        </th>
+                        <td className="w-8/12 p-2 font-bold items-start" ><span className="mr-5">Coin</span></td>
+                        <td className="w-2/12 py-2 font-bold items-start">Change</td>
+                        <td className="w-2/12 py-2 font-bold items-start">Price</td>
                     </tr>
                 {watchlist &&
                     (Object.entries(watchlist).map(([key]) => {
