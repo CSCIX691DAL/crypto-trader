@@ -120,7 +120,7 @@ export default function Coin() {
 
                 <div className=" bg-white shadow overflow-hidden sm:rounded justify-center items-center w-11/12 md:w-1/2" >
                     <div className="px-4 py-5 sm:px-6">
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">{coin} Details</h3>
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">{coinName ? coinName.charAt(0).toUpperCase() + coinName.slice(1) : ""} Details</h3>
 
                     </div>
                     <div className="border-t border-gray-200">
