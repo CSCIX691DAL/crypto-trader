@@ -40,7 +40,7 @@ const HoldingsItem = ({ name, count }) => {
 
             <td className="w-2/12">
                 <div className=" ml-auto align-middle flex-grow inline justify-end">
-                    <p className="font-bold pr-4 inline">${(price * count).toFixed(2)} CAD</p>
+                    <p className="font-bold pl-2 pr-4 inline">${(price * count).toFixed(2)} CAD</p>
                 </div>
                 
             </td>
