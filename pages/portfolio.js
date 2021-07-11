@@ -25,6 +25,7 @@ export default function Portfolio() {
     const [holdings, setHoldings] = React.useState({});
     const [search, setSearch] = React.useState("");
     const [watchlist,setWatchlist] = React.useState({});
+    const [watchlistSearch, setWatchlistSearch] = React.useState("");
 
     const hashEmail = () => {
         return MD5(session ? session.user.email : '').toString(encoder);
@@ -123,9 +124,11 @@ export default function Portfolio() {
                     </tbody>
                 </table>
 
-                 <div className="m-auto">   
+                <div className="m-auto">   
                     <h1 className="m-auto my-5 font-bold">Watchlist:</h1>  
                 </div>
+                <input className="border-2 border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none w-1/4 m-auto"
+                    type="search" name="search" placeholder="Search" onChange={e => setWatchlistSearch(e.currentTarget.value)}/>
 
                 <table className="m-auto w-full py-2">
                     <tbody>
@@ -136,8 +139,14 @@ export default function Portfolio() {
                         </tr>
                     </tbody>
                 {watchlist &&
-                    (Object.entries(watchlist).map(([key], index) => {
-                        return <WatchItem name={key} key={index} />
+                    (Object.entries(watchlist)
+                        .filter(coin => {
+                            if (watchlistSearch === "") return coin;
+                            else if (coin[0].toLowerCase().includes(watchlistSearch.toLowerCase())) return coin;
+                            else return false;
+                        })
+                        .map(([key], index) => {
+                            return <WatchItem name={key} key={index} />
                     }))
                 }
                 </table>
