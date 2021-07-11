@@ -81,7 +81,9 @@ export default function Portfolio() {
                 <div className="m-auto ">
                 <h1 className=" my-5 font-bold">Holdings:</h1>
                 </div>
-                <div className="sticky top-19">
+            
+                <table className="m-auto w-full">
+                    <tbody>
                     <tr className="flex  bg-blue-200 py-2 border border-blue-300">
                         <td className="w-6/12 px-2 font-bold items-start" ><span className="mr-5">Coins </span>
                         <input className="border-2 border-gray-300 bg-white h-9 px-5 rounded-lg text-sm focus:outline-none w-auto mr-0"
@@ -90,9 +92,6 @@ export default function Portfolio() {
                         <td className="w-2/12 py-2 font-bold px-2 items-end">Total Value</td>
                         <td className="w-3/12 py-2 font-bold items-start">Sell</td>
                     </tr>
-                </div>
-                <table className="m-auto w-full">
-                    <tbody>
                         {holdings &&
                             (Object.entries(holdings)
                             .filter(coin => {
@@ -110,27 +109,24 @@ export default function Portfolio() {
                 <div className="m-auto ">
                 <h1 className=" my-5 font-bold">Recent Transactions:</h1>
                 </div>
-                <div className="sticky top-19">
-                <tr className="flex py-2 bg-blue-200 py-2 border border-blue-300">
-                    <td className="w-6/12 py-2 px-2 font-bold items-start" >Coin</td>
-                    <td className="w-3/12 py-2 font-bold items-start">Quantity</td>
-                    <td className="w-3/12 py-2 font-bold items-start">Transaction Total</td>
-                </tr>
-                </div>        
- 
-
+               
                 <table className="m-auto w-full py-2">
                     <tbody>
+                        <tr className="flex py-2 bg-blue-200 py-2 border border-blue-300">
+                            <td className="w-6/12 py-2 px-2 font-bold items-start" >Coin</td>
+                            <td className="w-3/12 py-2 font-bold items-start">Quantity</td>
+                            <td className="w-3/12 py-2 font-bold items-start">Transaction Total</td>
+                        </tr>
 
                         {transactions.map(transaction => {
                          return <TransactionsItem transaction={transaction} />
                     })}
                     </tbody>
                 </table>
-
+                 <div className="m-auto">   
+                    <h1 className="m-auto my-5 font-bold">Watchlist:</h1>  
+                </div>
                 <table className="m-auto w-full py-2">
-                <h1 className="m-auto my-5 font-bold">Watchlist:</h1>
-                <div className="sticky top-19">
                     <tr className="flex  bg-blue-200 py-2 border border-blue-300">
                         <th className="w-3/12 py-2 font-bold items-start" ><span className="mr-5">Coins </span></th>
                         <th className="w-5/12 py-2 font-semibold px-2 items-end">As of {fetchdate}</th>
@@ -141,7 +137,6 @@ export default function Portfolio() {
                         
                         </th>
                     </tr>
-                </div>
                 {watchlist &&
                     (Object.entries(watchlist).map(([key]) => {
                         return <WatchItem name={key}  />
