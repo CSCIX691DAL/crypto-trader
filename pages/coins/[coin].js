@@ -7,10 +7,15 @@ import MD5 from 'crypto-js/md5'
 import encoder from 'crypto-js/enc-hex'
 import { purchase } from '../../services/transactions'
 import { getCoinInfo } from '../../services/coins'
-import { useEffect } from 'react'
 import axios from 'axios'
 import PriceChart from '../../components/PriceChart'
+import { addtoWatchList } from '../../services/user'
 
+/**
+ * Webpage for viewing detailed information about a cryptocurrency
+ * 
+ * Uses information from CoinGecko
+ */
 export default function Coin() {
     const [session, loading] = useSession();
     const router = useRouter();
@@ -32,23 +37,29 @@ export default function Coin() {
         })
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchdata = async () => {
             const resDay = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "1",
                 },
             });
             const resWeek = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "7",
+                },
+            });
+            const resMonth = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
+                params: {
+                    vs_currency: "cad",
+                    days: "31",
                 },
             });
             const resYear = await axios.get(`${COIN_GECKO_URL}coins/${coinName}/market_chart`, {
                 params: {
-                    vs_currency: "usd",
+                    vs_currency: "cad",
                     days: "365",
                 },
             });
@@ -56,15 +67,12 @@ export default function Coin() {
             setCoinData({
                 day: format(resDay.data.prices),
                 week: format(resWeek.data.prices),
+                month: format(resMonth.data.prices),
                 year: format(resYear.data.prices)
             });
-
-
-
         };
 
-        coinName ? fetchdata() : "";
-
+        coinName && fetchdata();
     }, [coinName])
 
     const [ticker, setTicker] = React.useState();
@@ -86,9 +94,7 @@ export default function Coin() {
             setSupply(data.market_data.circulating_supply);
         }
 
-        coinName ? getCoinDetails() : "";
-        console.log({ coin }.coin);
-
+        coinName && getCoinDetails();
     }, [coinName, cap, price, volume, supply, ticker]);
 
     return (
@@ -99,45 +105,48 @@ export default function Coin() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header />
+            <header className="w-full h-full mt-0">
+                <Header />
+            </header>
+
+            <div className="h-24" />
 
             <div className="flex m-8 flex-col font-semibold text-lg text-gray-800 justify-center items-center">
-                <div className="px-4 py-2 m-2 text-2xl">
-                    Crypto Currency {coin} 💰
+                <div className="px-4 py-2 m-2 text-4xl">
+                     {coinName ? coinName.charAt(0).toUpperCase() + coinName.slice(1) : ""} 
                 </div>
 
-                <div className="px-6 py-6 w-1/2 ..."><PriceChart data={coinData} /></div>
+                <div className="px-6 py-6 w-11/12 md:w-1/2 ..."><PriceChart data={coinData} /></div>
 
-                <div className=" bg-white shadow overflow-hidden sm:rounded w-2/4 justify-center items-center " >
+                <div className=" bg-white shadow overflow-hidden sm:rounded justify-center items-center w-11/12 md:w-1/2" >
                     <div className="px-4 py-5 sm:px-6">
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">{coin} Details</h3>
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">{coinName ? coinName.charAt(0).toUpperCase() + coinName.slice(1) : ""} Details</h3>
 
                     </div>
                     <div className="border-t border-gray-200">
                         <dl>
-
                             {/*add coin details through API - Ticker code:*/}
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500"> Ticker {coin}</dt>
+                                <dt className="text-sm font-medium text-gray-500"> Ticker</dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{ticker}</dd>
                             </div>
 
                             {/*/*add coin details through API - Price in CAD Dollars (use this as standard)*/}
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Price $CAD</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} </dd>
+                                <dt className="text-sm font-medium text-gray-500">Price</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> ${price} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Market Cap*/}
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Market Cap $CAD</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap}</dd>
+                                <dt className="text-sm font-medium text-gray-500">Market Cap</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${cap} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Volume (24h)*/}
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500"> Volume (24h) $CAD </dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume}</dd>
+                                <dt className="text-sm font-medium text-gray-500"> Volume (24h)</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${volume} CAD</dd>
                             </div>
 
                             {/*add coin details through API - Circulating supply*/}
@@ -161,12 +170,13 @@ export default function Coin() {
                                             )
                                         }
                                     </form>
-                                </div> 
+                                    <button onClick={() => addtoWatchList(coinName, hashEmail())} className="mr-2 rounded-xl p-2 bg-blue-500 text-white" > Add to Watchlist </button>
                                 </div>
-                    </dl>
-                </div>
+                            </div>
+                        </dl>
                     </div>
                 </div>
             </div>
-            )
+        </div>
+    )
 }

@@ -12,7 +12,9 @@ export default async (req, res) => {
             await db.collection('users').doc(id).set({
                     name: req.body.name,
                     email: req.body.email,
-                    holdings: []
+                    password: req.body.password,
+                    holdings: [],
+                    watchlist: []
                 }, { 
                     merge: true 
                 })

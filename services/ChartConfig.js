@@ -8,6 +8,11 @@ export const historyOptions = {
       animation: {
         duration: 2000,
       },
+      elements: {
+        point:{
+            radius: 0
+        }
+    },
       responsive: true,
       maintainAspectRatio: false,
       scales: {
